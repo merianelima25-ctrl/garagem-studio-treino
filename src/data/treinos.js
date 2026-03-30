@@ -148,7 +148,7 @@ export const treinos = [
     ],
   },
 
-  id: 9,
+ {id: 9,
     nome: "Treino Inferiores iniciante E",
     exercicios: [
       { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
@@ -158,7 +158,7 @@ export const treinos = [
       { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
       { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
          ],
-  
+        }
 ];
 
 export default treinos;
