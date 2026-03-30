@@ -264,6 +264,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 12,
+    paddingBottom: 40, // 🔥 remove espaço vazio estranho
   },
 
   header: {
@@ -291,14 +292,16 @@ const styles = {
   },
 
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: "center", // 🔥 melhora visual
   },
 
   series: {
     color: "#aaa",
     marginBottom: 10,
+    textAlign: "center",
   },
 
   card: {
@@ -327,11 +330,12 @@ const styles = {
     fontWeight: "bold",
   },
 
-  // 🔥 CORREÇÃO AQUI
   exerciseContainer: {
     display: "flex",
     flexDirection: "column",
     gap: 12,
+    maxWidth: 600,
+    margin: "0 auto", // 🔥 centraliza
   },
 
   carousel: {
