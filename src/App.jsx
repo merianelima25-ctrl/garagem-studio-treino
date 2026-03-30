@@ -111,8 +111,8 @@ export default function App() {
       <div style={styles.wrapper}>
         <header style={styles.header}>
           <div>
-            <h2>Olá 👋</h2>
-            <p style={{ color: "#aaa" }}>
+            <h2 style={styles.mainTitle}>Olá 👋</h2>
+            <p style={styles.subtitleStrong}>
               Treinos concluídos: {treinosFeitos}
             </p>
           </div>
@@ -124,7 +124,8 @@ export default function App() {
 
         {!treinoSelecionado && (
           <>
-            <h2>Seus treinos</h2>
+            <h2 style={styles.mainTitle}>Seus treinos</h2>
+
             {treinos.map((treino) => (
               <div
                 key={treino.id}
@@ -146,7 +147,9 @@ export default function App() {
               ← Voltar
             </button>
 
-            <h2>{treinoSelecionado.nome}</h2>
+            <h2 style={styles.mainTitle}>
+              {treinoSelecionado.nome}
+            </h2>
 
             <button style={styles.done} onClick={concluirTreino}>
               ✅ Concluir treino
@@ -173,8 +176,13 @@ export default function App() {
               ← Voltar
             </button>
 
-            <h2>{exercicioSelecionado.nome}</h2>
-            <p style={{ color: "#aaa" }}>{exercicioSelecionado.series}</p>
+            <h2 style={styles.exerciseTitle}>
+              {exercicioSelecionado.nome}
+            </h2>
+
+            <p style={styles.subtitleStrong}>
+              {exercicioSelecionado.series}
+            </p>
 
             <div style={styles.carousel}>
               {exercicioSelecionado.imagens?.map((img, i) => (
@@ -224,7 +232,7 @@ const styles = {
   },
 
   subtitle: {
-    color: "#aaa",
+    color: "#cbd5f5",
     marginBottom: 20,
   },
 
@@ -247,7 +255,7 @@ const styles = {
   },
 
   error: {
-    color: "red",
+    color: "#ef4444",
     fontSize: 12,
   },
 
@@ -258,15 +266,12 @@ const styles = {
     color: "#fff",
   },
 
-  // 🔥 CORREÇÃO PRINCIPAL
   wrapper: {
     width: "100%",
-    maxWidth: 500,
-    margin: "0 auto",
     padding: 16,
     display: "flex",
     flexDirection: "column",
-    gap: 16, // 👈 resolve o espaçamento gigante
+    gap: 16,
   },
 
   header: {
@@ -276,11 +281,29 @@ const styles = {
   },
 
   logout: {
-    background: "red",
+    background: "#ef4444",
     color: "#fff",
     border: "none",
     padding: "6px 12px",
     borderRadius: 6,
+  },
+
+  mainTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#f1f5f9",
+  },
+
+  exerciseTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginTop: 10,
+  },
+
+  subtitleStrong: {
+    color: "#94a3b8",
+    fontSize: 15,
   },
 
   card: {
@@ -289,6 +312,8 @@ const styles = {
     borderRadius: 12,
     cursor: "pointer",
     fontSize: 16,
+    color: "#e2e8f0",
+    fontWeight: "500",
   },
 
   back: {
@@ -306,24 +331,26 @@ const styles = {
     borderRadius: 10,
     color: "#fff",
     cursor: "pointer",
+    fontWeight: "bold",
   },
 
   carousel: {
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
     gap: 10,
     marginTop: 10,
   },
 
   img: {
-    width: "50%",
-    height: 160,
+    width: "100%",
+    height: 180,
     objectFit: "cover",
     borderRadius: 12,
   },
 
   video: {
     width: "100%",
-    height: 220,
+    height: 240,
     marginTop: 20,
     borderRadius: 12,
   },
