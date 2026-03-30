@@ -63,9 +63,9 @@ export const treinos = [
     nome: "Treino Peito",
     exercicios: [
       { nome: "Supino Reto", series: "4x10", imagens: [supino, supino1], video: "https://www.youtube.com/embed/EZMYCLKuGow" },
-      { nome: "Supino Inclinado", series: "3x10", imagens: [supinoInclinado, supinoInclinado1], video: "https://www.youtube.com/embed/8iPEnn-ltC8" },
-      { nome: "Peck Deck", series: "3x12", imagens: [peckdeck, peckdeck1], video: "https://www.youtube.com/embed/eozdVDA78K0" },
-      { nome: "Pullover", series: "3x12", imagens: [pullover, pullover1], video: "https://www.youtube.com/embed/0G2_XV7slIg" },
+      { nome: "Supino Inclinado", series: "3x10", imagens: [supinoInclinado, supinoInclinado1], video: "https://www.youtube.com/embed/WP1VLAt8hbM" },
+      { nome: "Peck Deck", series: "3x12", imagens: [peckdeck, peckdeck1], video: "https://www.youtube.com/embed/FzCnfD0gOXo" },
+      { nome: "Pullover", series: "3x12", imagens: [pullover, pullover1], video: "https://www.youtube.com/embed/-KaMXMMIVrU?si=gcmGTs-TAxew6CIR" },
     ],
   },
 

@@ -166,28 +166,22 @@ export default function App() {
 
         {exercicioSelecionado && (
           <>
-            {/* TOPO */}
-            <div>
-              <button
-                onClick={() => setExercicioSelecionado(null)}
-                style={styles.back}
-              >
-                ← Voltar
-              </button>
+            <button
+              onClick={() => setExercicioSelecionado(null)}
+              style={styles.back}
+            >
+              ← Voltar
+            </button>
 
-              <h2>{exercicioSelecionado.nome}</h2>
-              <p style={{ color: "#aaa", fontSize: 16 }}>
-                {exercicioSelecionado.series}
-              </p>
+            <h2>{exercicioSelecionado.nome}</h2>
+            <p style={{ color: "#aaa" }}>{exercicioSelecionado.series}</p>
 
-              <div style={styles.carousel}>
-                {exercicioSelecionado.imagens?.map((img, i) => (
-                  <img key={i} src={img} style={styles.img} />
-                ))}
-              </div>
+            <div style={styles.carousel}>
+              {exercicioSelecionado.imagens?.map((img, i) => (
+                <img key={i} src={img} style={styles.img} />
+              ))}
             </div>
 
-            {/* VÍDEO EMBAIXO */}
             {exercicioSelecionado.video && (
               <iframe
                 src={exercicioSelecionado.video}
@@ -207,13 +201,13 @@ export default function App() {
 const styles = {
   container: {
     height: "100vh",
-    width: "100%",
     background: "#0f172a",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
   },
+
   loginBox: {
     background: "#1e293b",
     padding: 30,
@@ -221,17 +215,19 @@ const styles = {
     width: "100%",
     maxWidth: 320,
     textAlign: "center",
-    boxShadow: "0 0 20px rgba(0,0,0,0.5)",
   },
+
   title: {
     color: "#22c55e",
     fontSize: 28,
     fontWeight: "bold",
   },
+
   subtitle: {
     color: "#aaa",
     marginBottom: 20,
   },
+
   input: {
     width: "100%",
     padding: 12,
@@ -239,6 +235,7 @@ const styles = {
     borderRadius: 8,
     border: "none",
   },
+
   button: {
     width: "100%",
     padding: 12,
@@ -247,8 +244,8 @@ const styles = {
     borderRadius: 8,
     color: "#fff",
     fontWeight: "bold",
-    cursor: "pointer",
   },
+
   error: {
     color: "red",
     fontSize: 12,
@@ -259,26 +256,23 @@ const styles = {
     minHeight: "100vh",
     background: "#0f172a",
     color: "#fff",
-    display: "flex",
-    flexDirection: "column",
   },
 
+  // 🔥 CORREÇÃO PRINCIPAL
   wrapper: {
     width: "100%",
-    maxWidth: 420,
+    maxWidth: 500,
     margin: "0 auto",
     padding: 16,
     display: "flex",
     flexDirection: "column",
-    minHeight: "100vh",
-    justifyContent: "space-between",
+    gap: 16, // 👈 resolve o espaçamento gigante
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
   },
 
   logout: {
@@ -287,20 +281,17 @@ const styles = {
     border: "none",
     padding: "6px 12px",
     borderRadius: 6,
-    cursor: "pointer",
   },
 
   card: {
     background: "#1e293b",
     padding: 16,
     borderRadius: 12,
-    marginBottom: 12,
     cursor: "pointer",
     fontSize: 16,
   },
 
   back: {
-    marginBottom: 15,
     background: "#334155",
     color: "#fff",
     border: "none",
@@ -314,29 +305,25 @@ const styles = {
     padding: 14,
     borderRadius: 10,
     color: "#fff",
-    marginBottom: 20,
     cursor: "pointer",
-    width: "100%",
-    fontSize: 16,
   },
 
   carousel: {
     display: "flex",
     gap: 10,
-    marginTop: 20,
-    justifyContent: "center",
+    marginTop: 10,
   },
 
   img: {
-    width: "48%",
-    height: 140,
+    width: "50%",
+    height: 160,
     objectFit: "cover",
     borderRadius: 12,
   },
 
   video: {
     width: "100%",
-    height: 280,
+    height: 220,
     marginTop: 20,
     borderRadius: 12,
   },
