@@ -26,7 +26,6 @@ export default function App() {
 
   const [treinosFeitos, setTreinosFeitos] = useState(0);
 
-  // 🔐 LOGIN
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
       setUser(usuario);
@@ -34,7 +33,6 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // 📊 BUSCAR PROGRESSO
   useEffect(() => {
     if (!user) return;
 
@@ -50,24 +48,15 @@ export default function App() {
     return () => unsubscribe();
   }, [user]);
 
-  // 🔥 LOGIN CORRIGIDO
   const handleLogin = async () => {
     try {
-      console.log("Tentando login...");
-
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         senha
       );
-
-      console.log("LOGADO:", userCredential.user);
-
       setErro("");
     } catch (e) {
-      console.error("ERRO FIREBASE:", e.code);
-      console.error("DETALHE:", e.message);
-
       setErro(e.message);
     }
   };
@@ -76,7 +65,6 @@ export default function App() {
     signOut(auth);
   };
 
-  // ✅ MARCAR TREINO
   const concluirTreino = async () => {
     await addDoc(collection(db, "progresso"), {
       userId: user.uid,
@@ -87,7 +75,6 @@ export default function App() {
     alert("Treino concluído 💪");
   };
 
-  // 🔐 LOGIN UI
   if (!user) {
     return (
       <div style={styles.container}>
@@ -123,7 +110,6 @@ export default function App() {
     );
   }
 
-  // 🔥 SISTEMA
   return (
     <div style={styles.app}>
       <header style={styles.header}>
@@ -198,6 +184,19 @@ export default function App() {
               <img key={i} src={img} style={styles.img} />
             ))}
           </div>
+
+          {/* 🔥 CORREÇÃO: VÍDEO ADICIONADO */}
+          {exercicioSelecionado.video && (
+            <iframe
+              width="100%"
+              height="250"
+              src={exercicioSelecionado.video}
+              title="Video"
+              frameBorder="0"
+              allowFullScreen
+              style={{ marginTop: 20, borderRadius: 10 }}
+            />
+          )}
         </>
       )}
     </div>
@@ -212,7 +211,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-
   loginBox: {
     background: "#1e293b",
     padding: 30,
@@ -221,18 +219,15 @@ const styles = {
     textAlign: "center",
     boxShadow: "0 0 20px rgba(0,0,0,0.5)",
   },
-
   title: {
     color: "#22c55e",
     fontSize: 32,
     fontWeight: "bold",
   },
-
   subtitle: {
     color: "#aaa",
     marginBottom: 20,
   },
-
   input: {
     width: "100%",
     padding: 10,
@@ -240,7 +235,6 @@ const styles = {
     borderRadius: 8,
     border: "none",
   },
-
   button: {
     width: "100%",
     padding: 10,
@@ -251,26 +245,22 @@ const styles = {
     fontWeight: "bold",
     cursor: "pointer",
   },
-
   error: {
     color: "red",
     fontSize: 12,
   },
-
   app: {
     padding: 20,
     background: "#0f172a",
     minHeight: "100vh",
     color: "#fff",
   },
-
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
   },
-
   logout: {
     background: "red",
     color: "#fff",
@@ -279,7 +269,6 @@ const styles = {
     borderRadius: 6,
     cursor: "pointer",
   },
-
   card: {
     background: "#1e293b",
     padding: 15,
@@ -287,7 +276,6 @@ const styles = {
     marginBottom: 10,
     cursor: "pointer",
   },
-
   back: {
     marginBottom: 10,
     background: "#334155",
@@ -296,7 +284,6 @@ const styles = {
     padding: "6px 12px",
     borderRadius: 6,
   },
-
   done: {
     background: "#22c55e",
     border: "none",
@@ -306,13 +293,11 @@ const styles = {
     marginBottom: 15,
     cursor: "pointer",
   },
-
   carousel: {
     display: "flex",
     gap: 10,
     marginTop: 10,
   },
-
   img: {
     width: 200,
     borderRadius: 10,
