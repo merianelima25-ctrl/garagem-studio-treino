@@ -71,7 +71,6 @@ export default function App() {
     alert("Treino concluído 💪");
   };
 
-  // LOGIN
   if (!user) {
     return (
       <div style={styles.container}>
@@ -123,7 +122,6 @@ export default function App() {
       </header>
 
       <div style={styles.wrapper}>
-        {/* LISTA TREINOS */}
         {!treinoSelecionado &&
           treinos.map((treino) => (
             <div
@@ -135,7 +133,6 @@ export default function App() {
             </div>
           ))}
 
-        {/* LISTA EXERCÍCIOS */}
         {treinoSelecionado && !exercicioSelecionado && (
           <>
             <button
@@ -165,7 +162,6 @@ export default function App() {
           </>
         )}
 
-        {/* EXERCÍCIO */}
         {exercicioSelecionado && (
           <div style={styles.exerciseContainer}>
             <button
@@ -213,6 +209,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
+
   loginBox: {
     background: "#1e293b",
     padding: 30,
@@ -220,15 +217,18 @@ const styles = {
     width: 300,
     textAlign: "center",
   },
+
   title: {
     color: "#22c55e",
     fontSize: 32,
     fontWeight: "bold",
   },
+
   subtitle: {
     color: "#aaa",
     marginBottom: 20,
   },
+
   input: {
     width: "100%",
     padding: 10,
@@ -236,6 +236,7 @@ const styles = {
     borderRadius: 8,
     border: "none",
   },
+
   button: {
     width: "100%",
     padding: 10,
@@ -245,6 +246,7 @@ const styles = {
     color: "#fff",
     fontWeight: "bold",
   },
+
   error: {
     color: "red",
     fontSize: 12,
@@ -252,15 +254,12 @@ const styles = {
 
   app: {
     width: "100%",
-    height: "100vh",
+    minHeight: "100vh",
     background: "#0f172a",
     color: "#fff",
-    display: "flex",
-    flexDirection: "column",
   },
 
   wrapper: {
-    flex: 1,
     padding: 16,
     display: "flex",
     flexDirection: "column",
@@ -332,6 +331,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 12,
+    minHeight: "70vh", // 🔥 CORREÇÃO REAL AQUI
   },
 
   carousel: {
