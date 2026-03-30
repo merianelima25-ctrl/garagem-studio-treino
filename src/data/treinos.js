@@ -121,6 +121,44 @@ export const treinos = [
       { nome: "Remada Alta", series: "3x12", imagens: [remadaAltaHalteres, remadaAltaHalteres1], video: "https://www.youtube.com/embed/Vl4nG6YpJ4E" },
     ],
   },
+  {
+    id: 7,
+    nome: "Treino Inferiores iniciante A",
+    exercicios: [
+      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
+      { nome: "Afundo", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Hack", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Panturrilha", series: "4x15", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+    ],
+  },
+
+  {
+    id: 8,
+    nome: "Treino Inferiores iniciante C",
+    exercicios: [
+      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
+      { nome: "Cadeira Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Mesa Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Sumô", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Gluteo na caneleira", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Abduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Aduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+    ],
+  },
+
+  id: 9,
+    nome: "Treino Inferiores iniciante E",
+    exercicios: [
+      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
+      { nome: "Cadaeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+      { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
+         ],
+  
 ];
 
 export default treinos;
