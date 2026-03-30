@@ -168,7 +168,7 @@ export default function App() {
         )}
 
         {exercicioSelecionado && (
-          <>
+          <div style={styles.exerciseContainer}>
             <button
               onClick={() => setExercicioSelecionado(null)}
               style={styles.back}
@@ -199,7 +199,7 @@ export default function App() {
                 style={styles.video}
               />
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
@@ -264,6 +264,7 @@ const styles = {
     minHeight: "100vh",
     background: "#0f172a",
     color: "#fff",
+    overflowY: "auto", // 🔥 resolve vertical
   },
 
   wrapper: {
@@ -272,6 +273,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 16,
+    minHeight: "100vh", // 🔥 resolve espaço vazio
   },
 
   header: {
@@ -353,5 +355,12 @@ const styles = {
     height: 240,
     marginTop: 20,
     borderRadius: 12,
+  },
+
+  exerciseContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+    paddingBottom: 40,
   },
 };
