@@ -174,7 +174,9 @@ export default function App() {
             </button>
 
             <h2>{exercicioSelecionado.nome}</h2>
-            <p style={{ color: "#aaa" }}>{exercicioSelecionado.series}</p>
+            <p style={{ color: "#aaa", fontSize: 16 }}>
+              {exercicioSelecionado.series}
+            </p>
 
             <div style={styles.carousel}>
               {exercicioSelecionado.imagens?.map((img, i) => (
@@ -247,24 +249,32 @@ const styles = {
     color: "red",
     fontSize: 12,
   },
+
   app: {
     width: "100%",
     minHeight: "100vh",
     background: "#0f172a",
     color: "#fff",
+    display: "flex",
+    flexDirection: "column",
   },
+
   wrapper: {
     width: "100%",
     maxWidth: 420,
     margin: "0 auto",
     padding: 16,
+    display: "flex",
+    flexDirection: "column",
   },
+
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 30,
   },
+
   logout: {
     background: "red",
     color: "#fff",
@@ -273,47 +283,55 @@ const styles = {
     borderRadius: 6,
     cursor: "pointer",
   },
+
   card: {
     background: "#1e293b",
-    padding: 14,
-    borderRadius: 10,
-    marginBottom: 10,
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
     cursor: "pointer",
+    fontSize: 16,
   },
+
   back: {
-    marginBottom: 10,
+    marginBottom: 15,
     background: "#334155",
     color: "#fff",
     border: "none",
     padding: "8px 12px",
     borderRadius: 6,
   },
+
   done: {
     background: "#22c55e",
     border: "none",
-    padding: 12,
-    borderRadius: 8,
+    padding: 14,
+    borderRadius: 10,
     color: "#fff",
-    marginBottom: 15,
+    marginBottom: 20,
     cursor: "pointer",
     width: "100%",
+    fontSize: 16,
   },
+
   carousel: {
     display: "flex",
     gap: 10,
-    marginTop: 10,
+    marginTop: 20,
     justifyContent: "center",
   },
+
   img: {
     width: "48%",
-    height: 120,
+    height: 140,
     objectFit: "cover",
-    borderRadius: 10,
+    borderRadius: 12,
   },
+
   video: {
     width: "100%",
-    height: 220,
+    height: 260,
     marginTop: 20,
-    borderRadius: 10,
+    borderRadius: 12,
   },
 };
