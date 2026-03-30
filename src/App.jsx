@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 import {
   collection,
-  addDoc,
   query,
   where,
   onSnapshot,
@@ -25,6 +24,18 @@ export default function App() {
   const [exercicioSelecionado, setExercicioSelecionado] = useState(null);
 
   const [treinosFeitos, setTreinosFeitos] = useState(0);
+
+  // 🔥 NOVO: divisão ABCDE
+  const diasTreino = [
+    { letra: "A", nome: "Costas e Bíceps" },
+    { letra: "B", nome: "Inferiores" },
+    { letra: "C", nome: "Peito e Tríceps" },
+    { letra: "D", nome: "Ombro e Trapézio" },
+    { letra: "E", nome: "Inferiores" },
+  ];
+
+  const hoje = new Date().getDay();
+  const treinoHoje = diasTreino[hoje % diasTreino.length];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
@@ -59,16 +70,6 @@ export default function App() {
 
   const handleLogout = () => {
     signOut(auth);
-  };
-
-  const concluirTreino = async () => {
-    await addDoc(collection(db, "progresso"), {
-      userId: user.uid,
-      treino: treinoSelecionado.nome,
-      data: new Date(),
-    });
-
-    alert("Treino concluído 💪");
   };
 
   if (!user) {
@@ -111,8 +112,14 @@ export default function App() {
       <header style={styles.header}>
         <div>
           <h2 style={styles.titleTop}>Olá 👋</h2>
+
           <p style={styles.subtitleTop}>
             Treinos concluídos: {treinosFeitos}
+          </p>
+
+          {/* 🔥 NOVO: treino do dia */}
+          <p style={styles.week}>
+            Hoje: {treinoHoje.letra} - {treinoHoje.nome}
           </p>
         </div>
 
@@ -145,10 +152,6 @@ export default function App() {
             <h2 style={styles.sectionTitle}>
               {treinoSelecionado.nome}
             </h2>
-
-            <button style={styles.done} onClick={concluirTreino}>
-              ✅ Concluir treino
-            </button>
 
             {treinoSelecionado.exercicios.map((ex, i) => (
               <div
@@ -263,7 +266,7 @@ const styles = {
     padding: 16,
     display: "flex",
     flexDirection: "column",
-    gap: 12,
+    gap: 14,
   },
 
   header: {
@@ -273,13 +276,21 @@ const styles = {
   },
 
   titleTop: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
 
   subtitleTop: {
     color: "#aaa",
-    fontSize: 13,
+    fontSize: 14,
+  },
+
+  // 🔥 NOVO ESTILO
+  week: {
+    fontSize: 15,
+    color: "#4ade80",
+    fontWeight: "bold",
+    marginTop: 4,
   },
 
   logout: {
@@ -291,23 +302,26 @@ const styles = {
   },
 
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#fff",
   },
 
   series: {
-    color: "#aaa",
+    color: "#ccc",
     marginBottom: 10,
+    fontSize: 16,
   },
 
   card: {
     background: "#1e293b",
-    padding: 16,
+    padding: 18,
     borderRadius: 12,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
 
   back: {
@@ -318,16 +332,6 @@ const styles = {
     color: "#fff",
   },
 
-  done: {
-    background: "#22c55e",
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
-    color: "#fff",
-    fontWeight: "bold",
-  },
-
-  // 🔥 CORREÇÃO AQUI
   exerciseContainer: {
     display: "flex",
     flexDirection: "column",
