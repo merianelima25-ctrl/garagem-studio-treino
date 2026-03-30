@@ -327,6 +327,7 @@ const styles = {
     fontWeight: "bold",
   },
 
+  // 🔥 CORREÇÃO AQUI
   exerciseContainer: {
     display: "flex",
     flexDirection: "column",
@@ -336,18 +337,19 @@ const styles = {
   carousel: {
     display: "flex",
     gap: 10,
+    flexWrap: "wrap",
   },
 
   img: {
-    width: "50%",
-    height: 150,
+    width: "48%",
+    aspectRatio: "16/9",
     objectFit: "cover",
     borderRadius: 12,
   },
 
   video: {
     width: "100%",
-    height: 220,
+    aspectRatio: "16/9",
     borderRadius: 12,
   },
 };
