@@ -50,11 +50,7 @@ export default function App() {
 
   const handleLogin = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        senha
-      );
+      await signInWithEmailAndPassword(auth, email, senha);
       setErro("");
     } catch (e) {
       setErro(e.message);
@@ -185,16 +181,13 @@ export default function App() {
             ))}
           </div>
 
-          {/* 🔥 CORREÇÃO: VÍDEO ADICIONADO */}
           {exercicioSelecionado.video && (
             <iframe
-              width="100%"
-              height="250"
               src={exercicioSelecionado.video}
               title="Video"
               frameBorder="0"
               allowFullScreen
-              style={{ marginTop: 20, borderRadius: 10 }}
+              style={styles.video}
             />
           )}
         </>
@@ -206,22 +199,25 @@ export default function App() {
 const styles = {
   container: {
     height: "100vh",
+    width: "100%",
     background: "#0f172a",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: 20,
   },
   loginBox: {
     background: "#1e293b",
     padding: 30,
     borderRadius: 12,
-    width: 300,
+    width: "100%",
+    maxWidth: 350,
     textAlign: "center",
     boxShadow: "0 0 20px rgba(0,0,0,0.5)",
   },
   title: {
     color: "#22c55e",
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "bold",
   },
   subtitle: {
@@ -230,14 +226,14 @@ const styles = {
   },
   input: {
     width: "100%",
-    padding: 10,
+    padding: 12,
     marginBottom: 10,
     borderRadius: 8,
     border: "none",
   },
   button: {
     width: "100%",
-    padding: 10,
+    padding: 12,
     background: "#22c55e",
     border: "none",
     borderRadius: 8,
@@ -250,10 +246,12 @@ const styles = {
     fontSize: 12,
   },
   app: {
-    padding: 20,
+    padding: 16,
     background: "#0f172a",
     minHeight: "100vh",
     color: "#fff",
+    maxWidth: 500,
+    margin: "0 auto",
   },
   header: {
     display: "flex",
@@ -271,27 +269,29 @@ const styles = {
   },
   card: {
     background: "#1e293b",
-    padding: 15,
+    padding: 16,
     borderRadius: 10,
     marginBottom: 10,
     cursor: "pointer",
+    width: "100%",
   },
   back: {
     marginBottom: 10,
     background: "#334155",
     color: "#fff",
     border: "none",
-    padding: "6px 12px",
+    padding: "8px 12px",
     borderRadius: 6,
   },
   done: {
     background: "#22c55e",
     border: "none",
-    padding: 10,
+    padding: 12,
     borderRadius: 8,
     color: "#fff",
     marginBottom: 15,
     cursor: "pointer",
+    width: "100%",
   },
   carousel: {
     display: "flex",
@@ -299,7 +299,14 @@ const styles = {
     marginTop: 10,
   },
   img: {
-    width: 200,
+    width: "48%",
+    borderRadius: 10,
+    objectFit: "cover",
+  },
+  video: {
+    width: "100%",
+    height: 220,
+    marginTop: 20,
     borderRadius: 10,
   },
 };
