@@ -108,90 +108,92 @@ export default function App() {
 
   return (
     <div style={styles.app}>
-      <header style={styles.header}>
-        <div>
-          <h2>Olá 👋</h2>
-          <p style={{ color: "#aaa" }}>
-            Treinos concluídos: {treinosFeitos}
-          </p>
-        </div>
-
-        <button style={styles.logout} onClick={handleLogout}>
-          Sair
-        </button>
-      </header>
-
-      {!treinoSelecionado && (
-        <>
-          <h2>Seus treinos</h2>
-          {treinos.map((treino) => (
-            <div
-              key={treino.id}
-              style={styles.card}
-              onClick={() => setTreinoSelecionado(treino)}
-            >
-              {treino.nome}
-            </div>
-          ))}
-        </>
-      )}
-
-      {treinoSelecionado && !exercicioSelecionado && (
-        <>
-          <button
-            onClick={() => setTreinoSelecionado(null)}
-            style={styles.back}
-          >
-            ← Voltar
-          </button>
-
-          <h2>{treinoSelecionado.nome}</h2>
-
-          <button style={styles.done} onClick={concluirTreino}>
-            ✅ Concluir treino
-          </button>
-
-          {treinoSelecionado.exercicios.map((ex, i) => (
-            <div
-              key={i}
-              style={styles.card}
-              onClick={() => setExercicioSelecionado(ex)}
-            >
-              {ex.nome}
-            </div>
-          ))}
-        </>
-      )}
-
-      {exercicioSelecionado && (
-        <>
-          <button
-            onClick={() => setExercicioSelecionado(null)}
-            style={styles.back}
-          >
-            ← Voltar
-          </button>
-
-          <h2>{exercicioSelecionado.nome}</h2>
-          <p style={{ color: "#aaa" }}>{exercicioSelecionado.series}</p>
-
-          <div style={styles.carousel}>
-            {exercicioSelecionado.imagens?.map((img, i) => (
-              <img key={i} src={img} style={styles.img} />
-            ))}
+      <div style={styles.wrapper}>
+        <header style={styles.header}>
+          <div>
+            <h2>Olá 👋</h2>
+            <p style={{ color: "#aaa" }}>
+              Treinos concluídos: {treinosFeitos}
+            </p>
           </div>
 
-          {exercicioSelecionado.video && (
-            <iframe
-              src={exercicioSelecionado.video}
-              title="Video"
-              frameBorder="0"
-              allowFullScreen
-              style={styles.video}
-            />
-          )}
-        </>
-      )}
+          <button style={styles.logout} onClick={handleLogout}>
+            Sair
+          </button>
+        </header>
+
+        {!treinoSelecionado && (
+          <>
+            <h2>Seus treinos</h2>
+            {treinos.map((treino) => (
+              <div
+                key={treino.id}
+                style={styles.card}
+                onClick={() => setTreinoSelecionado(treino)}
+              >
+                {treino.nome}
+              </div>
+            ))}
+          </>
+        )}
+
+        {treinoSelecionado && !exercicioSelecionado && (
+          <>
+            <button
+              onClick={() => setTreinoSelecionado(null)}
+              style={styles.back}
+            >
+              ← Voltar
+            </button>
+
+            <h2>{treinoSelecionado.nome}</h2>
+
+            <button style={styles.done} onClick={concluirTreino}>
+              ✅ Concluir treino
+            </button>
+
+            {treinoSelecionado.exercicios.map((ex, i) => (
+              <div
+                key={i}
+                style={styles.card}
+                onClick={() => setExercicioSelecionado(ex)}
+              >
+                {ex.nome}
+              </div>
+            ))}
+          </>
+        )}
+
+        {exercicioSelecionado && (
+          <>
+            <button
+              onClick={() => setExercicioSelecionado(null)}
+              style={styles.back}
+            >
+              ← Voltar
+            </button>
+
+            <h2>{exercicioSelecionado.nome}</h2>
+            <p style={{ color: "#aaa" }}>{exercicioSelecionado.series}</p>
+
+            <div style={styles.carousel}>
+              {exercicioSelecionado.imagens?.map((img, i) => (
+                <img key={i} src={img} style={styles.img} />
+              ))}
+            </div>
+
+            {exercicioSelecionado.video && (
+              <iframe
+                src={exercicioSelecionado.video}
+                title="Video"
+                frameBorder="0"
+                allowFullScreen
+                style={styles.video}
+              />
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -211,7 +213,7 @@ const styles = {
     padding: 30,
     borderRadius: 12,
     width: "100%",
-    maxWidth: 350,
+    maxWidth: 320,
     textAlign: "center",
     boxShadow: "0 0 20px rgba(0,0,0,0.5)",
   },
@@ -246,12 +248,16 @@ const styles = {
     fontSize: 12,
   },
   app: {
-    padding: 16,
-    background: "#0f172a",
+    width: "100%",
     minHeight: "100vh",
+    background: "#0f172a",
     color: "#fff",
-    maxWidth: 500,
+  },
+  wrapper: {
+    width: "100%",
+    maxWidth: 420,
     margin: "0 auto",
+    padding: 16,
   },
   header: {
     display: "flex",
@@ -269,11 +275,10 @@ const styles = {
   },
   card: {
     background: "#1e293b",
-    padding: 16,
+    padding: 14,
     borderRadius: 10,
     marginBottom: 10,
     cursor: "pointer",
-    width: "100%",
   },
   back: {
     marginBottom: 10,
@@ -297,11 +302,13 @@ const styles = {
     display: "flex",
     gap: 10,
     marginTop: 10,
+    justifyContent: "center",
   },
   img: {
     width: "48%",
-    borderRadius: 10,
+    height: 120,
     objectFit: "cover",
+    borderRadius: 10,
   },
   video: {
     width: "100%",
