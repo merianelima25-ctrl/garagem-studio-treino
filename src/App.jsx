@@ -264,7 +264,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 12,
-    paddingBottom: 40, // 🔥 remove espaço vazio estranho
   },
 
   header: {
@@ -292,16 +291,14 @@ const styles = {
   },
 
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
-    textAlign: "center", // 🔥 melhora visual
   },
 
   series: {
     color: "#aaa",
     marginBottom: 10,
-    textAlign: "center",
   },
 
   card: {
@@ -334,26 +331,23 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 12,
-    maxWidth: 600,
-    margin: "0 auto", // 🔥 centraliza
   },
 
   carousel: {
     display: "flex",
     gap: 10,
-    flexWrap: "wrap",
   },
 
   img: {
-    width: "48%",
-    aspectRatio: "16/9",
+    width: "50%",
+    height: 150,
     objectFit: "cover",
     borderRadius: 12,
   },
 
   video: {
     width: "100%",
-    aspectRatio: "16/9",
+    height: 220,
     borderRadius: 12,
   },
 };
