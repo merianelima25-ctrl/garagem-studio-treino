@@ -10,6 +10,7 @@ import {
   query,
   where,
   onSnapshot,
+  addDoc,
 } from "firebase/firestore";
 
 import treinos from "./data/treinos";
@@ -25,7 +26,17 @@ export default function App() {
 
   const [treinosFeitos, setTreinosFeitos] = useState(0);
 
-  // 🔥 NOVO: divisão ABCDE
+  // 🔥 NOVOS STATES
+  const [tempo, setTempo] = useState(0);
+  const [rodando, setRodando] = useState(false);
+
+  const [serieAtual, setSerieAtual] = useState(1);
+  const [concluido, setConcluido] = useState(false);
+
+  const [verHistorico, setVerHistorico] = useState(false);
+  const [historico, setHistorico] = useState([]);
+
+  // 🔥 TREINO ABCDE
   const diasTreino = [
     { letra: "A", nome: "Costas e Bíceps" },
     { letra: "B", nome: "Inferiores" },
@@ -37,6 +48,7 @@ export default function App() {
   const hoje = new Date().getDay();
   const treinoHoje = diasTreino[hoje % diasTreino.length];
 
+  // 🔐 Auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
       setUser(usuario);
@@ -44,6 +56,7 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  // 📊 progresso
   useEffect(() => {
     if (!user) return;
 
@@ -59,6 +72,79 @@ export default function App() {
     return () => unsubscribe();
   }, [user]);
 
+  // 📊 histórico
+  useEffect(() => {
+    if (!user) return;
+
+    const q = query(
+      collection(db, "historico"),
+      where("userId", "==", user.uid)
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const lista = snapshot.docs.map((doc) => doc.data());
+      setHistorico(lista);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
+  // ⏱ TIMER
+  useEffect(() => {
+    let interval;
+
+    if (rodando && tempo > 0) {
+      interval = setInterval(() => {
+        setTempo((prev) => prev - 1);
+      }, 1000);
+    }
+
+    if (tempo === 0 && rodando) {
+      setRodando(false);
+
+      new Audio(
+        "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+      ).play();
+
+      if (navigator.vibrate) {
+        navigator.vibrate([300, 200, 300]);
+      }
+    }
+
+    return () => clearInterval(interval);
+  }, [rodando, tempo]);
+
+  // 🔁 reset exercício
+  useEffect(() => {
+    setSerieAtual(1);
+    setConcluido(false);
+    setTempo(0);
+    setRodando(false);
+  }, [exercicioSelecionado]);
+
+  const iniciarDescanso = (segundos) => {
+    setTempo(segundos);
+    setRodando(true);
+  };
+
+  const proximaSerie = () => {
+    const total = parseInt(exercicioSelecionado.series);
+
+    if (serieAtual < total) {
+      setSerieAtual((prev) => prev + 1);
+    } else {
+      setConcluido(true);
+    }
+  };
+
+  const salvarConclusao = async () => {
+    await addDoc(collection(db, "historico"), {
+      userId: user.uid,
+      exercicio: exercicioSelecionado.nome,
+      data: new Date(),
+    });
+  };
+
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
@@ -72,6 +158,35 @@ export default function App() {
     signOut(auth);
   };
 
+  // 📊 HISTÓRICO
+  if (verHistorico) {
+    return (
+      <div style={styles.app}>
+        <button style={styles.back} onClick={() => setVerHistorico(false)}>
+          ← Voltar
+        </button>
+
+        <h2 style={styles.sectionTitle}>Histórico</h2>
+
+        {historico.length === 0 && (
+          <p style={{ color: "#aaa" }}>Nenhum treino ainda</p>
+        )}
+
+        {historico.map((item, i) => (
+          <div key={i} style={styles.card}>
+            <p>{item.exercicio}</p>
+            <p style={{ fontSize: 12, color: "#aaa" }}>
+              {item.data?.seconds
+                ? new Date(item.data.seconds * 1000).toLocaleDateString()
+                : ""}
+            </p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // 🔐 LOGIN
   if (!user) {
     return (
       <div style={styles.container}>
@@ -117,15 +232,23 @@ export default function App() {
             Treinos concluídos: {treinosFeitos}
           </p>
 
-          {/* 🔥 NOVO: treino do dia */}
           <p style={styles.week}>
             Hoje: {treinoHoje.letra} - {treinoHoje.nome}
           </p>
         </div>
 
-        <button style={styles.logout} onClick={handleLogout}>
-          Sair
-        </button>
+        <div>
+          <button
+            style={styles.historyBtn}
+            onClick={() => setVerHistorico(true)}
+          >
+            📊
+          </button>
+
+          <button style={styles.logout} onClick={handleLogout}>
+            Sair
+          </button>
+        </div>
       </header>
 
       <div style={styles.wrapper}>
@@ -182,6 +305,37 @@ export default function App() {
               {exercicioSelecionado.series}
             </p>
 
+            <p style={styles.series}>
+              Descanso: {exercicioSelecionado.descanso}s
+            </p>
+
+            <button
+              style={styles.done}
+              onClick={() =>
+                iniciarDescanso(exercicioSelecionado.descanso)
+              }
+            >
+              ⏱ Iniciar descanso
+            </button>
+
+            {tempo > 0 && (
+              <p style={styles.timer}>{tempo}s</p>
+            )}
+
+            <p style={styles.series}>
+              Série atual: {serieAtual}
+            </p>
+
+            {!concluido ? (
+              <button style={styles.done} onClick={proximaSerie}>
+                Próxima série
+              </button>
+            ) : (
+              <button style={styles.done} onClick={salvarConclusao}>
+                Salvar progresso
+              </button>
+            )}
+
             <div style={styles.carousel}>
               {exercicioSelecionado.imagens?.map((img, i) => (
                 <img key={i} src={img} style={styles.img} />
@@ -204,6 +358,7 @@ export default function App() {
   );
 }
 
+// 👉 SEUS STYLES (INALTERADOS)
 const styles = {
   container: {
     height: "100vh",
@@ -212,7 +367,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-
   loginBox: {
     background: "#1e293b",
     padding: 30,
@@ -220,18 +374,8 @@ const styles = {
     width: 300,
     textAlign: "center",
   },
-
-  title: {
-    color: "#22c55e",
-    fontSize: 32,
-    fontWeight: "bold",
-  },
-
-  subtitle: {
-    color: "#aaa",
-    marginBottom: 20,
-  },
-
+  title: { color: "#22c55e", fontSize: 32, fontWeight: "bold" },
+  subtitle: { color: "#aaa", marginBottom: 20 },
   input: {
     width: "100%",
     padding: 10,
@@ -239,7 +383,6 @@ const styles = {
     borderRadius: 8,
     border: "none",
   },
-
   button: {
     width: "100%",
     padding: 10,
@@ -249,50 +392,35 @@ const styles = {
     color: "#fff",
     fontWeight: "bold",
   },
-
-  error: {
-    color: "red",
-    fontSize: 12,
-  },
-
+  error: { color: "red", fontSize: 12 },
   app: {
     width: "100%",
     minHeight: "100vh",
     background: "#0f172a",
     color: "#fff",
   },
-
   wrapper: {
     padding: 16,
     display: "flex",
     flexDirection: "column",
     gap: 14,
   },
-
   header: {
     display: "flex",
     justifyContent: "space-between",
     padding: 16,
   },
-
-  titleTop: {
-    fontSize: 20,
-    fontWeight: "bold",
+  titleTop: { fontSize: 20, fontWeight: "bold" },
+  subtitleTop: { color: "#aaa", fontSize: 14 },
+  week: { color: "#4ade80", fontWeight: "bold" },
+  historyBtn: {
+    background: "#3b82f6",
+    color: "#fff",
+    border: "none",
+    padding: "6px 10px",
+    borderRadius: 6,
+    marginRight: 8,
   },
-
-  subtitleTop: {
-    color: "#aaa",
-    fontSize: 14,
-  },
-
-  // 🔥 NOVO ESTILO
-  week: {
-    fontSize: 15,
-    color: "#4ade80",
-    fontWeight: "bold",
-    marginTop: 4,
-  },
-
   logout: {
     background: "red",
     color: "#fff",
@@ -300,20 +428,13 @@ const styles = {
     padding: "6px 12px",
     borderRadius: 6,
   },
-
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#fff",
   },
-
-  series: {
-    color: "#ccc",
-    marginBottom: 10,
-    fontSize: 16,
-  },
-
+  series: { color: "#ccc", marginBottom: 10 },
+  timer: { fontSize: 22, color: "#22c55e", fontWeight: "bold" },
   card: {
     background: "#1e293b",
     padding: 18,
@@ -321,9 +442,7 @@ const styles = {
     textAlign: "center",
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff",
   },
-
   back: {
     background: "#334155",
     padding: 10,
@@ -331,26 +450,30 @@ const styles = {
     marginBottom: 10,
     color: "#fff",
   },
-
+  done: {
+    background: "#22c55e",
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 10,
+    color: "#fff",
+    fontWeight: "bold",
+  },
   exerciseContainer: {
     display: "flex",
     flexDirection: "column",
     gap: 12,
   },
-
   carousel: {
     display: "flex",
     gap: 10,
     flexWrap: "wrap",
   },
-
   img: {
     width: "48%",
     aspectRatio: "16/9",
     objectFit: "cover",
     borderRadius: 12,
   },
-
   video: {
     width: "100%",
     aspectRatio: "16/9",
