@@ -166,24 +166,28 @@ export default function App() {
 
         {exercicioSelecionado && (
           <>
-            <button
-              onClick={() => setExercicioSelecionado(null)}
-              style={styles.back}
-            >
-              ← Voltar
-            </button>
+            {/* TOPO */}
+            <div>
+              <button
+                onClick={() => setExercicioSelecionado(null)}
+                style={styles.back}
+              >
+                ← Voltar
+              </button>
 
-            <h2>{exercicioSelecionado.nome}</h2>
-            <p style={{ color: "#aaa", fontSize: 16 }}>
-              {exercicioSelecionado.series}
-            </p>
+              <h2>{exercicioSelecionado.nome}</h2>
+              <p style={{ color: "#aaa", fontSize: 16 }}>
+                {exercicioSelecionado.series}
+              </p>
 
-            <div style={styles.carousel}>
-              {exercicioSelecionado.imagens?.map((img, i) => (
-                <img key={i} src={img} style={styles.img} />
-              ))}
+              <div style={styles.carousel}>
+                {exercicioSelecionado.imagens?.map((img, i) => (
+                  <img key={i} src={img} style={styles.img} />
+                ))}
+              </div>
             </div>
 
+            {/* VÍDEO EMBAIXO */}
             {exercicioSelecionado.video && (
               <iframe
                 src={exercicioSelecionado.video}
@@ -266,13 +270,15 @@ const styles = {
     padding: 16,
     display: "flex",
     flexDirection: "column",
+    minHeight: "100vh",
+    justifyContent: "space-between",
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 30,
+    marginBottom: 20,
   },
 
   logout: {
@@ -330,7 +336,7 @@ const styles = {
 
   video: {
     width: "100%",
-    height: 260,
+    height: 280,
     marginTop: 20,
     borderRadius: 12,
   },
