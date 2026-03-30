@@ -71,6 +71,7 @@ export default function App() {
     alert("Treino concluído 💪");
   };
 
+  // LOGIN
   if (!user) {
     return (
       <div style={styles.container}>
@@ -108,36 +109,33 @@ export default function App() {
 
   return (
     <div style={styles.app}>
+      <header style={styles.header}>
+        <div>
+          <h2 style={styles.titleTop}>Olá 👋</h2>
+          <p style={styles.subtitleTop}>
+            Treinos concluídos: {treinosFeitos}
+          </p>
+        </div>
+
+        <button style={styles.logout} onClick={handleLogout}>
+          Sair
+        </button>
+      </header>
+
       <div style={styles.wrapper}>
-        <header style={styles.header}>
-          <div>
-            <h2 style={styles.mainTitle}>Olá 👋</h2>
-            <p style={styles.subtitleStrong}>
-              Treinos concluídos: {treinosFeitos}
-            </p>
-          </div>
+        {/* LISTA TREINOS */}
+        {!treinoSelecionado &&
+          treinos.map((treino) => (
+            <div
+              key={treino.id}
+              style={styles.card}
+              onClick={() => setTreinoSelecionado(treino)}
+            >
+              {treino.nome}
+            </div>
+          ))}
 
-          <button style={styles.logout} onClick={handleLogout}>
-            Sair
-          </button>
-        </header>
-
-        {!treinoSelecionado && (
-          <>
-            <h2 style={styles.mainTitle}>Seus treinos</h2>
-
-            {treinos.map((treino) => (
-              <div
-                key={treino.id}
-                style={styles.card}
-                onClick={() => setTreinoSelecionado(treino)}
-              >
-                {treino.nome}
-              </div>
-            ))}
-          </>
-        )}
-
+        {/* LISTA EXERCÍCIOS */}
         {treinoSelecionado && !exercicioSelecionado && (
           <>
             <button
@@ -147,7 +145,7 @@ export default function App() {
               ← Voltar
             </button>
 
-            <h2 style={styles.mainTitle}>
+            <h2 style={styles.sectionTitle}>
               {treinoSelecionado.nome}
             </h2>
 
@@ -167,6 +165,7 @@ export default function App() {
           </>
         )}
 
+        {/* EXERCÍCIO */}
         {exercicioSelecionado && (
           <div style={styles.exerciseContainer}>
             <button
@@ -176,11 +175,11 @@ export default function App() {
               ← Voltar
             </button>
 
-            <h2 style={styles.exerciseTitle}>
+            <h2 style={styles.sectionTitle}>
               {exercicioSelecionado.nome}
             </h2>
 
-            <p style={styles.subtitleStrong}>
+            <p style={styles.series}>
               {exercicioSelecionado.series}
             </p>
 
@@ -213,154 +212,143 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
   },
-
   loginBox: {
     background: "#1e293b",
     padding: 30,
     borderRadius: 12,
-    width: "100%",
-    maxWidth: 320,
+    width: 300,
     textAlign: "center",
   },
-
   title: {
     color: "#22c55e",
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: "bold",
   },
-
   subtitle: {
-    color: "#cbd5f5",
+    color: "#aaa",
     marginBottom: 20,
   },
-
   input: {
     width: "100%",
-    padding: 12,
+    padding: 10,
     marginBottom: 10,
     borderRadius: 8,
     border: "none",
   },
-
   button: {
     width: "100%",
-    padding: 12,
+    padding: 10,
     background: "#22c55e",
     border: "none",
     borderRadius: 8,
     color: "#fff",
     fontWeight: "bold",
   },
-
   error: {
-    color: "#ef4444",
+    color: "red",
     fontSize: 12,
   },
 
   app: {
     width: "100%",
-    minHeight: "100vh",
+    height: "100vh",
     background: "#0f172a",
     color: "#fff",
-    overflowY: "auto", // 🔥 resolve vertical
+    display: "flex",
+    flexDirection: "column",
   },
 
   wrapper: {
-    width: "100%",
+    flex: 1,
     padding: 16,
     display: "flex",
     flexDirection: "column",
-    gap: 16,
-    minHeight: "100vh", // 🔥 resolve espaço vazio
+    gap: 12,
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
+    padding: 16,
+  },
+
+  titleTop: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  subtitleTop: {
+    color: "#aaa",
+    fontSize: 13,
   },
 
   logout: {
-    background: "#ef4444",
+    background: "red",
     color: "#fff",
     border: "none",
     padding: "6px 12px",
     borderRadius: 6,
   },
 
-  mainTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#f1f5f9",
-  },
-
-  exerciseTitle: {
+  sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#ffffff",
-    marginTop: 10,
+    marginBottom: 10,
   },
 
-  subtitleStrong: {
-    color: "#94a3b8",
-    fontSize: 15,
+  series: {
+    color: "#aaa",
+    marginBottom: 10,
   },
 
   card: {
     background: "#1e293b",
     padding: 16,
     borderRadius: 12,
-    cursor: "pointer",
+    textAlign: "center",
     fontSize: 16,
-    color: "#e2e8f0",
-    fontWeight: "500",
+    fontWeight: "bold",
   },
 
   back: {
     background: "#334155",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10,
     color: "#fff",
-    border: "none",
-    padding: "8px 12px",
-    borderRadius: 6,
   },
 
   done: {
     background: "#22c55e",
-    border: "none",
-    padding: 14,
+    padding: 12,
     borderRadius: 10,
+    marginBottom: 10,
     color: "#fff",
-    cursor: "pointer",
     fontWeight: "bold",
   },
 
+  exerciseContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+
   carousel: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    display: "flex",
     gap: 10,
-    marginTop: 10,
   },
 
   img: {
-    width: "100%",
-    height: 180,
+    width: "50%",
+    height: 150,
     objectFit: "cover",
     borderRadius: 12,
   },
 
   video: {
     width: "100%",
-    height: 240,
-    marginTop: 20,
+    height: 220,
     borderRadius: 12,
-  },
-
-  exerciseContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 16,
-    paddingBottom: 40,
   },
 };
