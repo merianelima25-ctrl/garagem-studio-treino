@@ -38,7 +38,7 @@ import elevacaoFrontal1 from "../assets/elevacao-frontal1.jpeg";
 import elevacaoLateralPolia from "../assets/elevacao-lateral-polia.jpeg";
 import elevacaoLateralPolia1 from "../assets/elevacao-lateral-polia1.jpeg";
 import elevacaoLateral from "../assets/elevacao-lateral.jpeg";
-import elevacaoLateral1 from "../assets/elevacao-lateral.jpeg";
+import elevacaoLateral1 from "../assets/elevacao-lateral1.jpeg";
 
 // COSTAS
 import remadaBaixa from "../assets/remada-baixa.jpeg";
@@ -62,143 +62,144 @@ export const treinos = [
     id: 1,
     nome: "Treino Peito",
     exercicios: [
-      { nome: "Supino Reto", series: "4x10", imagens: [supino, supino1], video: "https://www.youtube.com/embed/EZMYCLKuGow", descanso: 60, },
-      { nome: "Supino Inclinado", series: "3x10", imagens: [supinoInclinado, supinoInclinado1], video: "https://www.youtube.com/embed/WP1VLAt8hbM",  descanso: 60, },
-      { nome: "Peck Deck", series: "3x12", imagens: [peckdeck, peckdeck1], video: "https://www.youtube.com/embed/FzCnfD0gOXo",  descanso: 60, },
-      { nome: "Pullover", series: "3x12", imagens: [pullover, pullover1], video: "https://www.youtube.com/embed/-KaMXMMIVrU?si=gcmGTs-TAxew6CIR",  descanso: 60, },
-    ],
+      { nome: "Supino Reto", series: "4x10", imagens: [supino, supino1], video: "https://www.youtube.com/embed/EZMYCLKuGow", descanso: 60 },
+      { nome: "Supino Inclinado", series: "3x10", imagens: [supinoInclinado, supinoInclinado1], video: "https://www.youtube.com/embed/WP1VLAt8hbM", descanso: 60 },
+      { nome: "Peck Deck", series: "3x12", imagens: [peckdeck, peckdeck1], video: "https://www.youtube.com/embed/FzCnfD0gOXo", descanso: 60 },
+      { nome: "Pullover", series: "3x12", imagens: [pullover, pullover1], video: "https://www.youtube.com/embed/-KaMXMMIVrU?si=gcmGTs-TAxew6CIR", descanso: 60 }
+    ]
   },
 
   {
     id: 2,
     nome: "Treino Tríceps",
     exercicios: [
-      { nome: "Tríceps Pulley", series: "4x10", imagens: [tricepsPulley, tricepsPulley1], video: "https://www.youtube.com/embed/2-LAMcpzODU" },
-      { nome: "Tríceps Corda", series: "3x12", imagens: [tricepsCorda, tricepsCorda1], video: "https://www.youtube.com/embed/vB5OHsJ3EME" },
-      { nome: "Tríceps Coice", series: "3x12", imagens: [tricepsCoice, tricepsCoice1], video: "https://www.youtube.com/embed/6SS6K3lAwZ8" },
-      { nome: "Tríceps Supinado", series: "3x12", imagens: [tricepsSupinado, tricepsSupinado1], video: "https://www.youtube.com/embed/qnL6h6XgE0k" },
-    ],
+      { nome: "Tríceps Pulley", series: "4x8", imagens: [tricepsPulley, tricepsPulley1], video: "https://www.youtube.com/embed/dTqDKC0D6P4", descanso: 60 },
+      { nome: "Tríceps Corda", series: "4x8", imagens: [tricepsCorda, tricepsCorda1], video: "https://www.youtube.com/embed/dTqDKC0D6P4", descanso: 60 },
+      { nome: "Tríceps Coice", series: "4x8", imagens: [tricepsCoice, tricepsCoice1], video: "https://www.youtube.com/embed/PyKv23F-fVM", descanso: 60 },
+      { nome: "Tríceps Supinado", series: "4x8", imagens: [tricepsSupinado, tricepsSupinado1], video: "https://www.youtube.com/embed/dTqDKC0D6P4", descanso: 60 }
+    ]
   },
 
   {
     id: 3,
     nome: "Treino Bíceps",
     exercicios: [
-      { nome: "Rosca Alternada", series: "4x10", imagens: [roscaAlternada, roscaAlternada1], video: "https://www.youtube.com/embed/sAq_ocpRh_I" },
-      { nome: "Rosca Concentrada", series: "3x12", imagens: [roscaConcentrada, roscaConcentrada1], video: "https://www.youtube.com/embed/soxrZlIl35U" },
-      { nome: "Rosca Direta", series: "4x10", imagens: [roscaDireta, roscaDireta1], video: "https://www.youtube.com/embed/kwG2ipFRgfo" },
-      { nome: "Rosca Scott", series: "3x12", imagens: [roscaScott, roscaScott1], video: "https://www.youtube.com/embed/zC3nLlEvin4" },
-    ],
+      { nome: "Rosca Alternada", series: "4x8", imagens: [roscaAlternada, roscaAlternada1], video: "https://www.youtube.com/embed/S1HAcTVQVYE", descanso: 60 },
+      { nome: "Rosca Concentrada", series: "4x8", imagens: [roscaConcentrada, roscaConcentrada1], video: "https://www.youtube.com/embed/EEpvOQAAtRo", descanso: 60 },
+      { nome: "Rosca Direta", series: "4x8", imagens: [roscaDireta, roscaDireta1], video: "https://www.youtube.com/embed/Q8TqfD8E7BU", descanso: 60 },
+      { nome: "Rosca Scott", series: "4x8", imagens: [roscaScott, roscaScott1], video: "https://www.youtube.com/embed/zpTK6eihdSA", descanso: 60 }
+    ]
   },
 
   {
     id: 4,
     nome: "Treino Ombro",
     exercicios: [
-      { nome: "Desenvolvimento", series: "4x10", imagens: [desenvolvimento, desenvolvimento1], video: "https://www.youtube.com/embed/B-aVuyhvLHU" },
-      { nome: "Elevação Frontal", series: "3x12", imagens: [elevacaoFrontal, elevacaoFrontal1], video: "https://www.youtube.com/embed/-t7fuZ0KhDA" },
-      { nome: "Elevação Lateral", series: "3x12", imagens: [elevacaoLateral, elevacaoLateral1], video: "https://www.youtube.com/embed/3VcKaXpzqRo" },
-      { nome: "Elevação Polia", series: "3x12", imagens: [elevacaoLateralPolia, elevacaoLateralPolia1], video: "https://www.youtube.com/embed/3VcKaXpzqRo" },
-    ],
+      { nome: "Desenvolvimento", series: "4x8", imagens: [desenvolvimento, desenvolvimento1], video: "", descanso: 60 },
+      { nome: "Elevação Frontal", series: "4x8", imagens: [elevacaoFrontal, elevacaoFrontal1], video: "", descanso: 60 },
+      { nome: "Elevação Lateral", series: "4x8", imagens: [elevacaoLateral, elevacaoLateral1], video: "", descanso: 60 },
+      { nome: "Elevação Polia", series: "4x8", imagens: [elevacaoLateralPolia, elevacaoLateralPolia1], video: "", descanso: 60 }
+    ]
   },
 
   {
     id: 5,
     nome: "Treino Costas",
     exercicios: [
-      { nome: "Remada Baixa", series: "4x10", imagens: [remadaBaixa, remadaBaixa1], video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Puxada Triângulo", series: "3x12", imagens: [puxadaTriangulo, puxadaTriangulo1], video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Puxada Alta", series: "3x12", imagens: [puxadaAlta, puxadaAlta1], video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Pulldown", series: "3x12", imagens: [pulldown, pulldown1], video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-    ],
+      { nome: "Remada Baixa", series: "4x10", imagens: [remadaBaixa, remadaBaixa1], video: "https://www.youtube.com/embed/OJU3u9JbH48", descanso: 60 },
+      { nome: "Puxada Triângulo", series: "4x10", imagens: [puxadaTriangulo, puxadaTriangulo1], video: "https://www.youtube.com/embed/9FFLBDWXSZA", descanso: 60 },
+      { nome: "Puxada Alta", series: "4x10", imagens: [puxadaAlta, puxadaAlta1], video: "https://www.youtube.com/embed/9FFLBDWXSZA", descanso: 60 },
+      { nome: "Pulldown", series: "4x10", imagens: [pulldown, pulldown1], video: "https://www.youtube.com/embed/v6-QIOY0nW0", descanso: 60 }
+    ]
   },
 
   {
     id: 6,
     nome: "Treino Trapézio",
     exercicios: [
-      { nome: "Encolhimento", series: "4x12", imagens: [encolhimento, encolhimento1], video: "https://www.youtube.com/embed/jt8z7Yy9s5M" },
-      { nome: "Remada Alta", series: "3x12", imagens: [remadaAltaHalteres, remadaAltaHalteres1], video: "https://www.youtube.com/embed/Vl4nG6YpJ4E" },
-    ],
+      { nome: "Encolhimento", series: "4x15", imagens: [encolhimento, encolhimento1], video: "https://www.youtube.com/embed/RhGjwIUe16E", descanso: 60 },
+      { nome: "Remada Alta", series: "4x12", imagens: [remadaAltaHalteres, remadaAltaHalteres1], video: "https://www.youtube.com/embed/tm0IywBhIYM", descanso: 60 }
+    ]
   },
+
   {
     id: 7,
     nome: "Treino Inferiores iniciante A",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Afundo", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Hack", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Panturrilha", series: "4x15", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-    ],
+      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Afundo", series: "4x8", video: "https://www.youtube.com/embed/Umzor-_g-tQ", descanso: 90 },
+      { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
+      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
+      { nome: "Hack", series: "4x8", video: "https://www.youtube.com/embed/LeAgTrHfWuo", descanso: 90 },
+      { nome: "Panturrilha", series: "4x15", video: "https://www.youtube.com/embed/nSUHPPd4If8", descanso: 90 }
+    ]
   },
 
   {
     id: 8,
     nome: "Treino Inferiores iniciante C",
     exercicios: [
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Cadeira Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Mesa Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Sumô", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Gluteo na caneleira", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Abduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Aduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-    ],
+      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
+      { nome: "Cadeira Flexora", series: "4x8", video: "https://www.youtube.com/embed/Zss6E3VU6X0", descanso: 90 },
+      { nome: "Mesa Flexora", series: "4x8", video: "https://www.youtube.com/embed/2-ULaRrQa7c", descanso: 90 },
+      { nome: "Sumô", series: "4x8", video: "https://www.youtube.com/embed/uSbxGCa71PU", descanso: 90 },
+      { nome: "Gluteo na caneleira", series: "4x8", video: "https://www.youtube.com/embed/wE2iG00C-ao", descanso: 90 },
+      { nome: "Cadeira Abdutora", series: "4x8", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
+      { nome: "Cadeira Adutora", series: "4x8", video: "https://www.youtube.com/embed/B-2lEIr2sfs", descanso: 90 }
+    ]
   },
 
- {id: 9,
+  {
+    id: 9,
     nome: "Treino Inferiores iniciante E",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Cadaeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-         ],
-        }
+      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
+      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
+      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
+      { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/AqALAGcDvcI", descanso: 90 },
+      { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/XYCCcD0MxN8", descanso: 90 }
+    ]
+  },
 
-
-        {
+  {
     id: 10,
-    nome: "Treino Inferiores iniciante A",
+    nome: "Treino isolado com progressão de carga A",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Afundo", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Hack", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Panturrilha", series: "4x15", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-    ],
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
+      { nome: "Agachamento", series: "3x10-8-6", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Afundo (step frente e atrás)", series: "3x10-8-6", video: "https://www.youtube.com/embed/Umzor-_g-tQ", descanso: 90 },
+      { nome: "Cadeira Extensora", series: "3x10-8-6", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
+      { nome: "Leg Press", series: "3x10-8-6", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
+      { nome: "Agachamento Taça", series: "3x10-8-6", video: "https://www.youtube.com/embed/isSu2co__oY", descanso: 90 }
+    ]
   },
 
   {
     id: 11,
-    nome: "Treino Inferiores iniciante C",
+    nome: "Treino isolado com progressão de carga C",
     exercicios: [
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Cadeira Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Mesa Flexora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Sumô", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Gluteo na caneleira", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Abduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Aduçao", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-    ],
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/B-2lEIr2sfs", descanso: 90 },
+      { nome: "Stiff", series: "3x10-8-6", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
+      { nome: "Cadeira Flexora", series: "3x10-8-6", video: "https://www.youtube.com/embed/Zss6E3VU6X0", descanso: 90 },
+      { nome: "Mesa Flexora", series: "3x10-8-6", video: "https://www.youtube.com/embed/2-ULaRrQa7c", descanso: 90 },
+      { nome: "Bom Dia", series: "3x10-8-6", video: "https://www.youtube.com/embed/48gi7GPzTLQ", descanso: 90 },
+      { nome: "Flexão de Joelho em Pé", series: "3x10-8-6", video: "https://www.youtube.com/embed/isSu2co__oY", descanso: 90 }
+    ]
   },
 
- {id: 12,
-    nome: "Treino Inferiores iniciante E",
+  {
+    id: 12,
+    nome: "Treino Isolado com progressão de carga E",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/GZbfZ033f74" },
-      { nome: "Cadaeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-      { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/CAwf7n6Luuc" },
-         ],
-        }
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
+      { nome: "Agachamento Búlgaro", series: "3x10-8-6", video: "https://www.youtube.com/embed/IGf9fR4Y7Iw", descanso: 90 },
+      { nome: "Step Up", series: "3x10-8-6", video: "https://www.youtube.com/embed/qYFlvmFu2wE", descanso: 90 },
+      { nome: "Levantamento Terra", series: "3x10-8-6", video: "https://www.youtube.com/embed/50AkPBZwACQ", descanso: 90 },
+      { nome: "Agachamento Sumô", series: "3x10-8-6", video: "https://www.youtube.com/embed/uSbxGCa71PU", descanso: 90 },
+      { nome: "Coice na Polia", series: "3x10-8-6", video: "https://www.youtube.com/embed/XYCCcD0MxN8", descanso: 90 }
+    ]
+  }
 ];
 
 export default treinos;
