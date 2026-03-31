@@ -1,0 +1,9 @@
+{
+  "appId": "com.garagem.studio",
+  "appName": "garagem-studio-treinos",
+  "webDir": "dist",
+  "server": {
+    "url": "https://garagem-studio-treino.vercel.app",
+    "cleartext": true
+  }
+}

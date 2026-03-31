@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">garagem-studio-treinos</string>
+    <string name="title_activity_main">garagem-studio-treinos</string>
+    <string name="package_name">com.garagem.studio</string>
+    <string name="custom_url_scheme">com.garagem.studio</string>
+</resources>
