@@ -11,6 +11,9 @@ import {
   where,
   onSnapshot,
   addDoc,
+  deleteDoc,
+  doc,
+  getDocs,
 } from "firebase/firestore";
 
 import treinos from "./data/treinos";
@@ -26,7 +29,6 @@ export default function App() {
 
   const [treinosFeitos, setTreinosFeitos] = useState(0);
 
-  // 🔥 NOVOS STATES
   const [tempo, setTempo] = useState(0);
   const [rodando, setRodando] = useState(false);
 
@@ -36,7 +38,6 @@ export default function App() {
   const [verHistorico, setVerHistorico] = useState(false);
   const [historico, setHistorico] = useState([]);
 
-  // 🔥 TREINO ABCDE
   const diasTreino = [
     { letra: "A", nome: "Costas e Bíceps" },
     { letra: "B", nome: "Inferiores" },
@@ -48,7 +49,6 @@ export default function App() {
   const hoje = new Date().getDay();
   const treinoHoje = diasTreino[hoje % diasTreino.length];
 
-  // 🔐 Auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
       setUser(usuario);
@@ -56,7 +56,6 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // 📊 progresso
   useEffect(() => {
     if (!user) return;
 
@@ -72,7 +71,6 @@ export default function App() {
     return () => unsubscribe();
   }, [user]);
 
-  // 📊 histórico
   useEffect(() => {
     if (!user) return;
 
@@ -82,14 +80,16 @@ export default function App() {
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const lista = snapshot.docs.map((doc) => doc.data());
+      const lista = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setHistorico(lista);
     });
 
     return () => unsubscribe();
   }, [user]);
 
-  // ⏱ TIMER
   useEffect(() => {
     let interval;
 
@@ -114,7 +114,6 @@ export default function App() {
     return () => clearInterval(interval);
   }, [rodando, tempo]);
 
-  // 🔁 reset exercício
   useEffect(() => {
     setSerieAtual(1);
     setConcluido(false);
@@ -138,11 +137,33 @@ export default function App() {
   };
 
   const salvarConclusao = async () => {
+    const hoje = new Date().toLocaleDateString();
+
+    const q = query(
+      collection(db, "historico"),
+      where("userId", "==", user.uid),
+      where("exercicio", "==", exercicioSelecionado.nome),
+      where("dataString", "==", hoje)
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      alert("Você já salvou esse treino hoje!");
+      return;
+    }
+
     await addDoc(collection(db, "historico"), {
       userId: user.uid,
       exercicio: exercicioSelecionado.nome,
       data: new Date(),
+      dataString: hoje,
     });
+  };
+
+  const excluirItem = async (id) => {
+    if (!window.confirm("Deseja excluir esse treino?")) return;
+    await deleteDoc(doc(db, "historico", id));
   };
 
   const handleLogin = async () => {
@@ -158,7 +179,6 @@ export default function App() {
     signOut(auth);
   };
 
-  // 📊 HISTÓRICO
   if (verHistorico) {
     return (
       <div style={styles.app}>
@@ -172,21 +192,35 @@ export default function App() {
           <p style={{ color: "#aaa" }}>Nenhum treino ainda</p>
         )}
 
-        {historico.map((item, i) => (
-          <div key={i} style={styles.card}>
+        {historico.map((item) => (
+          <div key={item.id} style={styles.card}>
             <p>{item.exercicio}</p>
+
             <p style={{ fontSize: 12, color: "#aaa" }}>
               {item.data?.seconds
                 ? new Date(item.data.seconds * 1000).toLocaleDateString()
                 : ""}
             </p>
+
+            <button
+              onClick={() => excluirItem(item.id)}
+              style={{
+                marginTop: 10,
+                background: "red",
+                color: "#fff",
+                border: "none",
+                padding: "6px 10px",
+                borderRadius: 6,
+              }}
+            >
+              Excluir
+            </button>
           </div>
         ))}
       </div>
     );
   }
 
-  // 🔐 LOGIN
   if (!user) {
     return (
       <div style={styles.container}>
@@ -357,126 +391,3 @@ export default function App() {
     </div>
   );
 }
-
-// 👉 SEUS STYLES (INALTERADOS)
-const styles = {
-  container: {
-    height: "100vh",
-    background: "#0f172a",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loginBox: {
-    background: "#1e293b",
-    padding: 30,
-    borderRadius: 12,
-    width: 300,
-    textAlign: "center",
-  },
-  title: { color: "#22c55e", fontSize: 32, fontWeight: "bold" },
-  subtitle: { color: "#aaa", marginBottom: 20 },
-  input: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 8,
-    border: "none",
-  },
-  button: {
-    width: "100%",
-    padding: 10,
-    background: "#22c55e",
-    border: "none",
-    borderRadius: 8,
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  error: { color: "red", fontSize: 12 },
-  app: {
-    width: "100%",
-    minHeight: "100vh",
-    background: "#0f172a",
-    color: "#fff",
-  },
-  wrapper: {
-    padding: 16,
-    display: "flex",
-    flexDirection: "column",
-    gap: 14,
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  titleTop: { fontSize: 20, fontWeight: "bold" },
-  subtitleTop: { color: "#aaa", fontSize: 14 },
-  week: { color: "#4ade80", fontWeight: "bold" },
-  historyBtn: {
-    background: "#3b82f6",
-    color: "#fff",
-    border: "none",
-    padding: "6px 10px",
-    borderRadius: 6,
-    marginRight: 8,
-  },
-  logout: {
-    background: "red",
-    color: "#fff",
-    border: "none",
-    padding: "6px 12px",
-    borderRadius: 6,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  series: { color: "#ccc", marginBottom: 10 },
-  timer: { fontSize: 22, color: "#22c55e", fontWeight: "bold" },
-  card: {
-    background: "#1e293b",
-    padding: 18,
-    borderRadius: 12,
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  back: {
-    background: "#334155",
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 10,
-    color: "#fff",
-  },
-  done: {
-    background: "#22c55e",
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  exerciseContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 12,
-  },
-  carousel: {
-    display: "flex",
-    gap: 10,
-    flexWrap: "wrap",
-  },
-  img: {
-    width: "48%",
-    aspectRatio: "16/9",
-    objectFit: "cover",
-    borderRadius: 12,
-  },
-  video: {
-    width: "100%",
-    aspectRatio: "16/9",
-    borderRadius: 12,
-  },
-};
