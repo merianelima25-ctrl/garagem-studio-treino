@@ -9,6 +9,7 @@ import {
   collection,
   query,
   where,
+  orderBy,
   onSnapshot,
   addDoc,
   deleteDoc,
@@ -84,9 +85,10 @@ export default function App() {
     if (!user) return;
 
     const q = query(
-      collection(db, "progresso"),
-      where("userId", "==", user.uid)
-    );
+  collection(db, "historico"),
+  where("userId", "==", user.uid),
+  orderBy("data", "desc")
+);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setTreinosFeitos(snapshot.size);
