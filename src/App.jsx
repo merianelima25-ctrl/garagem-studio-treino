@@ -16,15 +16,6 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
 import treinos from "./data/treinos";
 
 export default function App() {
@@ -47,15 +38,6 @@ export default function App() {
   const [verHistorico, setVerHistorico] = useState(false);
   const [historico, setHistorico] = useState([]);
 
-  const [verEvolucao, setVerEvolucao] = useState(false);
-  const [evolucao, setEvolucao] = useState([]);
-
-  const [peso, setPeso] = useState("");
-  const [peito, setPeito] = useState("");
-  const [braco, setBraco] = useState("");
-  const [cintura, setCintura] = useState("");
-  const [metaPeso, setMetaPeso] = useState("");
-
   const diasTreino = [
     { letra: "A", nome: "Costas e Bíceps" },
     { letra: "B", nome: "Inferiores" },
@@ -66,18 +48,6 @@ export default function App() {
 
   const hoje = new Date().getDay();
   const treinoHoje = diasTreino[hoje % diasTreino.length];
-
-  const dadosGrafico = evolucao
-    .map((item) => ({
-      peso: Number(item.peso),
-      peito: Number(item.peito) || 0,
-      braco: Number(item.braco) || 0,
-      cintura: Number(item.cintura) || 0,
-      data: item.data
-        ? new Date(item.data.toDate()).toLocaleDateString()
-        : "",
-    }))
-    .reverse();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
@@ -115,25 +85,6 @@ export default function App() {
         ...d.data(),
       }));
       setHistorico(lista);
-    });
-
-    return () => unsubscribe();
-  }, [user]);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const q = query(
-      collection(db, "evolucao"),
-      where("userId", "==", user.uid)
-    );
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const lista = snapshot.docs.map((d) => ({
-        id: d.id,
-        ...d.data(),
-      }));
-      setEvolucao(lista);
     });
 
     return () => unsubscribe();
@@ -216,27 +167,6 @@ export default function App() {
     }
   };
 
-  const salvarEvolucao = async () => {
-    if (!peso) {
-      alert("Informe o peso");
-      return;
-    }
-
-    await addDoc(collection(db, "evolucao"), {
-      userId: user.uid,
-      peso,
-      peito,
-      braco,
-      cintura,
-      data: new Date(),
-    });
-
-    setPeso("");
-    setPeito("");
-    setBraco("");
-    setCintura("");
-  };
-
   const excluirItem = async (id) => {
     if (!window.confirm("Deseja excluir esse treino?")) return;
     await deleteDoc(doc(db, "historico", id));
@@ -255,62 +185,6 @@ export default function App() {
     signOut(auth);
   };
 
-  if (verEvolucao) {
-    return (
-      <div style={styles.app}>
-        <button style={styles.back} onClick={() => setVerEvolucao(false)}>
-          ← Voltar
-        </button>
-
-        <h2 style={styles.sectionTitle}>Evolução corporal</h2>
-
-        <input style={styles.input} placeholder="Peso (kg)" value={peso} onChange={(e) => setPeso(e.target.value)} />
-        <input style={styles.input} placeholder="Peito" value={peito} onChange={(e) => setPeito(e.target.value)} />
-        <input style={styles.input} placeholder="Braço" value={braco} onChange={(e) => setBraco(e.target.value)} />
-        <input style={styles.input} placeholder="Cintura" value={cintura} onChange={(e) => setCintura(e.target.value)} />
-        <input style={styles.input} placeholder="Meta de peso (kg)" value={metaPeso} onChange={(e) => setMetaPeso(e.target.value)} />
-
-        <button style={styles.button} onClick={salvarEvolucao}>
-          Salvar evolução
-        </button>
-
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={dadosGrafico}>
-            <XAxis dataKey="data" />
-            <YAxis />
-            <Tooltip />
-
-            <Line type="monotone" dataKey="peso" stroke="#22c55e" strokeWidth={3} />
-            <Line type="monotone" dataKey="peito" stroke="#3b82f6" />
-            <Line type="monotone" dataKey="braco" stroke="#f59e0b" />
-            <Line type="monotone" dataKey="cintura" stroke="#ef4444" />
-
-            {metaPeso && (
-              <Line
-                type="monotone"
-                dataKey={() => Number(metaPeso)}
-                stroke="#ffffff"
-                strokeDasharray="5 5"
-              />
-            )}
-          </LineChart>
-        </ResponsiveContainer>
-
-        {evolucao.map((item) => (
-          <div key={item.id} style={styles.card}>
-            <p>Peso: {item.peso} kg</p>
-            <p>Peito: {item.peito}</p>
-            <p>Braço: {item.braco}</p>
-            <p>Cintura: {item.cintura}</p>
-            <p style={{ fontSize: 12, color: "#aaa" }}>
-              {item.data ? new Date(item.data.toDate()).toLocaleDateString() : ""}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   if (verHistorico) {
     return (
       <div style={styles.app}>
@@ -320,11 +194,18 @@ export default function App() {
 
         <h2 style={styles.sectionTitle}>Histórico</h2>
 
+        {historico.length === 0 && (
+          <p style={{ color: "#aaa" }}>Nenhum treino ainda</p>
+        )}
+
         {historico.map((item) => (
           <div key={item.id} style={styles.card}>
             <p>{item.exercicio}</p>
+
             <p style={{ fontSize: 12, color: "#aaa" }}>
-              {item.data ? new Date(item.data.toDate()).toLocaleDateString() : ""}
+              {item.data
+                ? new Date(item.data.toDate()).toLocaleDateString()
+                : ""}
             </p>
 
             <button
@@ -356,8 +237,20 @@ export default function App() {
 
           <p style={styles.subtitle}>Acesse seu treino</p>
 
-          <input style={styles.input} placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input style={styles.input} type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
+          <input
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            style={styles.input}
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
           {erro && <p style={styles.error}>{erro}</p>}
 
@@ -373,7 +266,8 @@ export default function App() {
     <div style={styles.app}>
       <header style={styles.header}>
         <div>
-          <h2 style={styles.titleTop}>Olá 👋</h2>
+          <h2 style={styles.titleTop}>Olá 
+            {auth.currentUser?.email.split("@")[0].split(".")[0]} 👋</h2>
           <p style={styles.subtitleTop}>
             Treinos concluídos: {treinosFeitos}
           </p>
@@ -383,27 +277,50 @@ export default function App() {
         </div>
 
         <div>
-          <button style={styles.historyBtn} onClick={() => setVerHistorico(true)}>📊</button>
-          <button style={styles.historyBtn} onClick={() => setVerEvolucao(true)}>📈</button>
-          <button style={styles.logout} onClick={handleLogout}>Sair</button>
+          <button
+            style={styles.historyBtn}
+            onClick={() => setVerHistorico(true)}
+          >
+            📊
+          </button>
+
+          <button style={styles.logout} onClick={handleLogout}>
+            Sair
+          </button>
         </div>
       </header>
 
       <div style={styles.wrapper}>
         {!treinoSelecionado &&
           treinos.map((treino) => (
-            <div key={treino.id} style={styles.card} onClick={() => setTreinoSelecionado(treino)}>
+            <div
+              key={treino.id}
+              style={styles.card}
+              onClick={() => setTreinoSelecionado(treino)}
+            >
               {treino.nome}
             </div>
           ))}
 
         {treinoSelecionado && !exercicioSelecionado && (
           <>
-            <button onClick={() => setTreinoSelecionado(null)} style={styles.back}>← Voltar</button>
-            <h2 style={styles.sectionTitle}>{treinoSelecionado.nome}</h2>
+            <button
+              onClick={() => setTreinoSelecionado(null)}
+              style={styles.back}
+            >
+              ← Voltar
+            </button>
+
+            <h2 style={styles.sectionTitle}>
+              {treinoSelecionado.nome}
+            </h2>
 
             {treinoSelecionado.exercicios.map((ex, i) => (
-              <div key={i} style={styles.card} onClick={() => setExercicioSelecionado(ex)}>
+              <div
+                key={i}
+                style={styles.card}
+                onClick={() => setExercicioSelecionado(ex)}
+              >
                 {ex.nome}
               </div>
             ))}
@@ -412,25 +329,48 @@ export default function App() {
 
         {exercicioSelecionado && (
           <div style={styles.exerciseContainer}>
-            <button onClick={() => setExercicioSelecionado(null)} style={styles.back}>← Voltar</button>
+            <button
+              onClick={() => setExercicioSelecionado(null)}
+              style={styles.back}
+            >
+              ← Voltar
+            </button>
 
-            <h2 style={styles.sectionTitle}>{exercicioSelecionado.nome}</h2>
+            <h2 style={styles.sectionTitle}>
+              {exercicioSelecionado.nome}
+            </h2>
 
-            <p style={styles.series}>{exercicioSelecionado.series}</p>
-            <p style={styles.series}>Descanso: {exercicioSelecionado.descanso}s</p>
+            <p style={styles.series}>
+              {exercicioSelecionado.series}
+            </p>
 
-            <button style={styles.done} onClick={() => iniciarDescanso(exercicioSelecionado.descanso)}>
+            <p style={styles.series}>
+              Descanso: {exercicioSelecionado.descanso}s
+            </p>
+
+            <button
+              style={styles.done}
+              onClick={() =>
+                iniciarDescanso(exercicioSelecionado.descanso)
+              }
+            >
               ⏱ Iniciar descanso
             </button>
 
             {tempo > 0 && <p style={styles.timer}>{tempo}s</p>}
 
-            <p style={styles.series}>Série atual: {serieAtual}</p>
+            <p style={styles.series}>
+              Série atual: {serieAtual}
+            </p>
 
             {!concluido ? (
-              <button style={styles.done} onClick={proximaSerie}>Próxima série</button>
+              <button style={styles.done} onClick={proximaSerie}>
+                Próxima série
+              </button>
             ) : (
-              <button style={styles.done} onClick={salvarConclusao}>Salvar progresso</button>
+              <button style={styles.done} onClick={salvarConclusao}>
+                Salvar progresso
+              </button>
             )}
 
             <div style={styles.carousel}>
@@ -440,7 +380,13 @@ export default function App() {
             </div>
 
             {exercicioSelecionado.video && (
-              <iframe src={exercicioSelecionado.video} title="Video" frameBorder="0" allowFullScreen style={styles.video} />
+              <iframe
+                src={exercicioSelecionado.video}
+                title="Video"
+                frameBorder="0"
+                allowFullScreen
+                style={styles.video}
+              />
             )}
           </div>
         )}
@@ -449,6 +395,7 @@ export default function App() {
   );
 }
 
+// 🔥 STYLES (RESTAURADO COMPLETO)
 const styles = {
   container: {
     height: "100vh",
