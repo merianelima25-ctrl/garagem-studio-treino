@@ -17,6 +17,15 @@ import {
 } from "firebase/firestore";
 
 import treinos from "./data/treinos";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -38,6 +47,19 @@ export default function App() {
   const [verHistorico, setVerHistorico] = useState(false);
   const [historico, setHistorico] = useState([]);
 
+  // ✅ MEDIDAS (NOVO)
+  const [verMedidas, setVerMedidas] = useState(false);
+  const [medidas, setMedidas] = useState([]);
+  const [formMedidas, setFormMedidas] = useState({
+    peso: "",
+    altura: "",
+    coxa: "",
+    cintura: "",
+    quadril: "",
+    braco: "",
+    peito: "",
+  });
+
   const diasTreino = [
     { letra: "A", nome: "Costas e Bíceps" },
     { letra: "B", nome: "Inferiores" },
@@ -49,6 +71,7 @@ export default function App() {
   const hoje = new Date().getDay();
   const treinoHoje = diasTreino[hoje % diasTreino.length];
 
+  // AUTH
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuario) => {
       setUser(usuario);
@@ -56,6 +79,7 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  // TREINOS FEITOS
   useEffect(() => {
     if (!user) return;
 
@@ -71,6 +95,7 @@ export default function App() {
     return () => unsubscribe();
   }, [user]);
 
+  // HISTÓRICO
   useEffect(() => {
     if (!user) return;
 
@@ -90,6 +115,27 @@ export default function App() {
     return () => unsubscribe();
   }, [user]);
 
+  // MEDIDAS
+  useEffect(() => {
+    if (!user) return;
+
+    const q = query(
+      collection(db, "medidas"),
+      where("userId", "==", user.uid)
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const lista = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+      setMedidas(lista);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
+  // TIMER
   useEffect(() => {
     let interval;
 
@@ -121,6 +167,7 @@ export default function App() {
     setRodando(false);
   }, [exercicioSelecionado]);
 
+  // FUNÇÕES
   const iniciarDescanso = (segundos) => {
     setTempo(segundos);
     setRodando(true);
@@ -167,6 +214,32 @@ export default function App() {
     }
   };
 
+  const salvarMedidas = async () => {
+    try {
+      if (!user) return;
+
+      const hoje = new Date().toLocaleDateString();
+
+      await addDoc(collection(db, "medidas"), {
+        userId: user.uid,
+        data: new Date(),
+        dataString: hoje,
+        peso: Number(formMedidas.peso) || 0,
+        altura: Number(formMedidas.altura) || 0,
+        coxa: Number(formMedidas.coxa) || 0,
+        cintura: Number(formMedidas.cintura) || 0,
+        quadril: Number(formMedidas.quadril) || 0,
+        braco: Number(formMedidas.braco) || 0,
+        peito: Number(formMedidas.peito) || 0,
+      });
+
+      alert("Medidas salvas!");
+      setVerMedidas(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const excluirItem = async (id) => {
     if (!window.confirm("Deseja excluir esse treino?")) return;
     await deleteDoc(doc(db, "historico", id));
@@ -184,6 +257,56 @@ export default function App() {
   const handleLogout = () => {
     signOut(auth);
   };
+
+  // ✅ TELA MEDIDAS (CORRIGIDO POSIÇÃO)
+  if (verMedidas) {
+    return (
+      <div style={styles.app}>
+        <button style={styles.back} onClick={() => setVerMedidas(false)}>
+          ← Voltar
+        </button>
+
+        <h2 style={styles.sectionTitle}>Medidas</h2>
+
+        {Object.keys(formMedidas).map((campo) => (
+          <input
+            key={campo}
+            placeholder={campo}
+            value={formMedidas[campo]}
+            onChange={(e) =>
+              setFormMedidas({
+                ...formMedidas,
+                [campo]: e.target.value,
+              })
+            }
+            style={styles.input}
+          />
+        ))}
+
+        <button style={styles.done} onClick={salvarMedidas}>
+          Salvar medidas
+        </button>
+
+        <div style={{ width: "100%", height: 300 }}>
+          <ResponsiveContainer>
+            <LineChart data={medidas}>
+              <XAxis dataKey="dataString" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line dataKey="peso" stroke="#22c55e" />
+              <Line dataKey="altura" stroke="#3b82f6" />
+              <Line dataKey="coxa" stroke="#f59e0b" />
+              <Line dataKey="cintura" stroke="#ef4444" />
+              <Line dataKey="quadril" stroke="#8b5cf6" />
+              <Line dataKey="braco" stroke="#14b8a6" />
+              <Line dataKey="peito" stroke="#eab308" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  }
 
   if (verHistorico) {
     return (
@@ -266,8 +389,7 @@ export default function App() {
     <div style={styles.app}>
       <header style={styles.header}>
         <div>
-          <h2 style={styles.titleTop}>Olá 
-            {auth.currentUser?.email.split("@")[0].split(".")[0]} 👋</h2>
+          <h2 style={styles.titleTop}>Olá 👋</h2>
           <p style={styles.subtitleTop}>
             Treinos concluídos: {treinosFeitos}
           </p>
@@ -282,6 +404,13 @@ export default function App() {
             onClick={() => setVerHistorico(true)}
           >
             📊
+          </button>
+
+          <button
+            style={styles.historyBtn}
+            onClick={() => setVerMedidas(true)}
+          >
+            📏
           </button>
 
           <button style={styles.logout} onClick={handleLogout}>
