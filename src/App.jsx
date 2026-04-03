@@ -47,7 +47,7 @@ export default function App() {
   const [verHistorico, setVerHistorico] = useState(false);
   const [historico, setHistorico] = useState([]);
 
-  // ✅ MEDIDAS (NOVO)
+  // 🔥 MEDIDAS
   const [verMedidas, setVerMedidas] = useState(false);
   const [medidas, setMedidas] = useState([]);
   const [formMedidas, setFormMedidas] = useState({
@@ -151,10 +151,6 @@ export default function App() {
       new Audio(
         "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
       ).play();
-
-      if (navigator.vibrate) {
-        navigator.vibrate([300, 200, 300]);
-      }
     }
 
     return () => clearInterval(interval);
@@ -258,7 +254,25 @@ export default function App() {
     signOut(auth);
   };
 
-  // ✅ TELA MEDIDAS (CORRIGIDO POSIÇÃO)
+  // 🔥 CÁLCULO DE EVOLUÇÃO
+  const dadosOrdenados = [...medidas].sort(
+    (a, b) => new Date(a.data) - new Date(b.data)
+  );
+
+  const primeiro = dadosOrdenados[0];
+  const ultimo = dadosOrdenados[dadosOrdenados.length - 1];
+
+  const calcular = (campo) => {
+    if (!primeiro || !ultimo) return 0;
+    return (ultimo[campo] || 0) - (primeiro[campo] || 0);
+  };
+
+  const formatar = (valor) => {
+    if (valor > 0) return `+${valor}`;
+    return valor;
+  };
+
+  // 🔥 TELA MEDIDAS
   if (verMedidas) {
     return (
       <div style={styles.app}>
@@ -287,9 +301,16 @@ export default function App() {
           Salvar medidas
         </button>
 
+        <div style={{ marginBottom: 20 }}>
+          <p>Peso: {formatar(calcular("peso"))} kg</p>
+          <p>Cintura: {formatar(calcular("cintura"))} cm</p>
+          <p>Peito: {formatar(calcular("peito"))} cm</p>
+          <p>Braço: {formatar(calcular("braco"))} cm</p>
+        </div>
+
         <div style={{ width: "100%", height: 300 }}>
           <ResponsiveContainer>
-            <LineChart data={medidas}>
+            <LineChart data={dadosOrdenados}>
               <XAxis dataKey="dataString" />
               <YAxis />
               <Tooltip />
