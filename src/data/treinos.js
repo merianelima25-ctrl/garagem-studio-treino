@@ -96,7 +96,7 @@ export const treinos = [
     nome: "Treino Ombro F",
     exercicios: [
       { nome: "Desenvolvimento", series: "4x8", imagens: [desenvolvimento, desenvolvimento1], video: "https://www.youtube.com/embed/EuQAfhXBEvs", descanso: 60 },
-      { nome: "Elevação Frontal", series: "4x8", imagens: [elevacaoFrontal, elevacaoFrontal1], video: "https://www.youtube.com/embed/NxSuojHZa8k, https://www.youtube.com/embed/S7B5LwWrLA0", descanso: 60 },
+      { nome: "Elevação Frontal", series: "4x8", imagens: [elevacaoFrontal, elevacaoFrontal1], video: [ "https://www.youtube.com/embed/NxSuojHZa8k", "https://www.youtube.com/embed/S7B5LwWrLA0" ], descanso: 60 },
       { nome: "Elevação Lateral", series: "4x8", imagens: [elevacaoLateral, elevacaoLateral1], video: "https://www.youtube.com/embed/IwWvZ0rlNXs", descanso: 60 },
       { nome: "Elevação Lateral Polia", series: "4x8", imagens: [elevacaoLateralPolia, elevacaoLateralPolia1], video: "https://www.youtube.com/embed/sKPJdvVvHuI", descanso: 60 }
     ]
