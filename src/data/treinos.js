@@ -60,7 +60,7 @@ import remadaAltaHalteres1 from "../assets/remada-alta-halteres1.jpeg";
 export const treinos = [
   {
     id: 1,
-    nome: "Treino Peito",
+    nome: "Treino Peito B",
     exercicios: [
       { nome: "Supino Reto", series: "4x10", imagens: [supino, supino1], video: "https://www.youtube.com/embed/EZMYCLKuGow", descanso: 60 },
       { nome: "Supino Inclinado", series: "3x10", imagens: [supinoInclinado, supinoInclinado1], video: "https://www.youtube.com/embed/WP1VLAt8hbM", descanso: 60 },
@@ -71,7 +71,7 @@ export const treinos = [
 
   {
     id: 2,
-    nome: "Treino Tríceps",
+    nome: "Treino Tríceps B",
     exercicios: [
       { nome: "Tríceps Pulley", series: "4x8", imagens: [tricepsPulley, tricepsPulley1], video: "https://www.youtube.com/embed/dTqDKC0D6P4", descanso: 60 },
       { nome: "Tríceps Corda", series: "4x8", imagens: [tricepsCorda, tricepsCorda1], video: "https://www.youtube.com/embed/dTqDKC0D6P4", descanso: 60 },
@@ -82,7 +82,7 @@ export const treinos = [
 
   {
     id: 3,
-    nome: "Treino Bíceps",
+    nome: "Treino Bíceps D",
     exercicios: [
       { nome: "Rosca Alternada", series: "4x8", imagens: [roscaAlternada, roscaAlternada1], video: "https://www.youtube.com/embed/S1HAcTVQVYE", descanso: 60 },
       { nome: "Rosca Concentrada", series: "4x8", imagens: [roscaConcentrada, roscaConcentrada1], video: "https://www.youtube.com/embed/EEpvOQAAtRo", descanso: 60 },
@@ -93,18 +93,18 @@ export const treinos = [
 
   {
     id: 4,
-    nome: "Treino Ombro",
+    nome: "Treino Ombro F",
     exercicios: [
-      { nome: "Desenvolvimento", series: "4x8", imagens: [desenvolvimento, desenvolvimento1], video: "", descanso: 60 },
-      { nome: "Elevação Frontal", series: "4x8", imagens: [elevacaoFrontal, elevacaoFrontal1], video: "", descanso: 60 },
-      { nome: "Elevação Lateral", series: "4x8", imagens: [elevacaoLateral, elevacaoLateral1], video: "", descanso: 60 },
-      { nome: "Elevação Polia", series: "4x8", imagens: [elevacaoLateralPolia, elevacaoLateralPolia1], video: "", descanso: 60 }
+      { nome: "Desenvolvimento", series: "4x8", imagens: [desenvolvimento, desenvolvimento1], video: "https://www.youtube.com/embed/EuQAfhXBEvs", descanso: 60 },
+      { nome: "Elevação Frontal", series: "4x8", imagens: [elevacaoFrontal, elevacaoFrontal1], video: "https://www.youtube.com/embed/NxSuojHZa8k, https://www.youtube.com/embed/S7B5LwWrLA0", descanso: 60 },
+      { nome: "Elevação Lateral", series: "4x8", imagens: [elevacaoLateral, elevacaoLateral1], video: "https://www.youtube.com/embed/IwWvZ0rlNXs", descanso: 60 },
+      { nome: "Elevação Lateral Polia", series: "4x8", imagens: [elevacaoLateralPolia, elevacaoLateralPolia1], video: "https://www.youtube.com/embed/sKPJdvVvHuI", descanso: 60 }
     ]
   },
 
   {
     id: 5,
-    nome: "Treino Costas",
+    nome: "Treino Costas D",
     exercicios: [
       { nome: "Remada Baixa", series: "4x10", imagens: [remadaBaixa, remadaBaixa1], video: "https://www.youtube.com/embed/OJU3u9JbH48", descanso: 60 },
       { nome: "Puxada Triângulo", series: "4x10", imagens: [puxadaTriangulo, puxadaTriangulo1], video: "https://www.youtube.com/embed/9FFLBDWXSZA", descanso: 60 },
@@ -115,7 +115,7 @@ export const treinos = [
 
   {
     id: 6,
-    nome: "Treino Trapézio",
+    nome: "Treino Trapézio F",
     exercicios: [
       { nome: "Encolhimento", series: "4x15", imagens: [encolhimento, encolhimento1], video: "https://www.youtube.com/embed/RhGjwIUe16E", descanso: 60 },
       { nome: "Remada Alta", series: "4x12", imagens: [remadaAltaHalteres, remadaAltaHalteres1], video: "https://www.youtube.com/embed/tm0IywBhIYM", descanso: 60 }
