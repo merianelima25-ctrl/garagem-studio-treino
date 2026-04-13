@@ -532,14 +532,30 @@ export default function App() {
             </div>
 
             {exercicioSelecionado.video && (
-              <iframe
-                src={exercicioSelecionado.video}
-                title="Video"
-                frameBorder="0"
-                allowFullScreen
-                style={styles.video}
-              />
-            )}
+  Array.isArray(exercicioSelecionado.video) ? (
+    exercicioSelecionado.video.map((v, i) => (
+      <iframe
+        key={i}
+        src={v}
+        title={`Video ${i}`}
+        frameBorder="0"
+        allowFullScreen
+        style={{
+          ...styles.video,
+          marginBottom: 10
+        }}
+      />
+    ))
+  ) : (
+    <iframe
+      src={exercicioSelecionado.video}
+      title="Video"
+      frameBorder="0"
+      allowFullScreen
+      style={styles.video}
+    />
+  )
+)}
           </div>
         )}
       </div>
