@@ -197,7 +197,7 @@ export const treinos = [
       { nome: "Step Up", series: "3x10-8-6", video: "https://www.youtube.com/embed/qYFlvmFu2wE", descanso: 90 },
       { nome: "Levantamento Terra", series: "3x10-8-6", video: "https://www.youtube.com/embed/50AkPBZwACQ", descanso: 90 },
       { nome: "Agachamento Sumô", series: "3x10-8-6", video: "https://www.youtube.com/embed/uSbxGCa71PU", descanso: 90 },
-      { nome: "Coice na Polia", series: "3x10-8-6", video: "https://www.youtube.com/embed/XYCCcD0MxN8", descanso: 90 }
+      { nome: "Coice na Polia", series: "3x10-8-6", video: [ "https://youtube.com/embed/1AHpsvuYRhE?si=49QPImGJsZNgkLla", "https://www.youtube.com/embed/XYCCcD0MxN8" ], descanso: 90 }
     ]
   }
 ];
