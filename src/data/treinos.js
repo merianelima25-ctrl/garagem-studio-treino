@@ -126,11 +126,11 @@ export const treinos = [
     id: 7,
     nome: "Treino Inferiores iniciante A",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Agachamento", series: "4x8", video: [ "https://youtube.com/embed/Nb-yDcN0CUE?si=N5waalrWZ8UXEJL6", "https://www.youtube.com/embed/zgk71dUUt0Y" ], descanso: 90 },
       { nome: "Afundo", series: "4x8", video: "https://www.youtube.com/embed/Umzor-_g-tQ", descanso: 90 },
       { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
-      { nome: "Hack", series: "4x8", video: "https://www.youtube.com/embed/LeAgTrHfWuo", descanso: 90 },
+      { nome: "Leg Press 45", series: "4x8", video: [ "https://youtube.com/embed/HTz5WMQwaNw?si=tpVQNuQJpyba6iVz", "https://www.youtube.com/embed/nY8UsiAqwds" ], descanso: 90 },
+      { nome: "Agachamento Hack", series: "4x8", video: [ "https://youtube.com/embed/VroQfpaI8zo?si=d21a-LHfxj5LIUKe", "https://www.youtube.com/embed/LeAgTrHfWuo" ], descanso: 90 },
       { nome: "Panturrilha", series: "4x15", video: "https://www.youtube.com/embed/nSUHPPd4If8", descanso: 90 }
     ]
   },
@@ -139,13 +139,13 @@ export const treinos = [
     id: 8,
     nome: "Treino Inferiores iniciante C",
     exercicios: [
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
-      { nome: "Cadeira Flexora", series: "4x8", video: "https://www.youtube.com/embed/Zss6E3VU6X0", descanso: 90 },
+      { nome: "Stiff", series: "4x8", video: [ "https://youtube.com/embed/rI20dW9dP18?si=54PVwgQsjnZ3rdz1", "https://www.youtube.com/embed/u1E3_u2gJYE" ], descanso: 90 },
+      { nome: "Cadeira Flexora", series: "4x8", video: [ "https://youtube.com/embed/GN_-ZffR7WU?si=Im_02--Ohe6cvWSU", "https://www.youtube.com/embed/Zss6E3VU6X0" ], descanso: 90 },
       { nome: "Mesa Flexora", series: "4x8", video: "https://www.youtube.com/embed/2-ULaRrQa7c", descanso: 90 },
-      { nome: "Sumô", series: "4x8", video: "https://www.youtube.com/embed/uSbxGCa71PU", descanso: 90 },
+      { nome: "Sumô", series: "4x8", video: [ "https://youtube.com/embed/Jddi_hlOzdg?si=xXeDy2JfeTg0Ky42", "https://www.youtube.com/embed/uSbxGCa71PU" ], descanso: 90 },
       { nome: "Gluteo na caneleira", series: "4x8", video: "https://www.youtube.com/embed/wE2iG00C-ao", descanso: 90 },
-      { nome: "Cadeira Abdutora", series: "4x8", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
-      { nome: "Cadeira Adutora", series: "4x8", video: "https://www.youtube.com/embed/B-2lEIr2sfs", descanso: 90 }
+      { nome: "Cadeira Abdutora", series: "4x8", video: [ "https://youtube.com/embed/fsTefwdvHrU?si=nnPnvSs7qd9FsqbV", "https://www.youtube.com/embed/_vDDFsPbubs" ], descanso: 90 },
+      { nome: "Cadeira Adutora", series: "4x8", video: [ "https://youtube.com/embed/kVvT8DKKuBY?si=LUUYlSnlQrZcznO0", "https://www.youtube.com/embed/B-2lEIr2sfs" ], descanso: 90 }
     ]
   },
 
@@ -153,12 +153,12 @@ export const treinos = [
     id: 9,
     nome: "Treino Inferiores iniciante E",
     exercicios: [
-      { nome: "Agachamento", series: "4x8", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Agachamento", series: "4x8", video: [ "https://youtube.com/embed/Nb-yDcN0CUE?si=N5waalrWZ8UXEJL6", "https://www.youtube.com/embed/zgk71dUUt0Y" ], descanso: 90 },
       { nome: "Cadeira Extensora", series: "4x8", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
-      { nome: "Leg Press 45", series: "4x8", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
-      { nome: "Stiff", series: "4x8", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
-      { nome: "Flexão de Joelho em Pé", series: "4x8", video: "https://www.youtube.com/embed/AqALAGcDvcI", descanso: 90 },
-      { nome: "Coice na Polia", series: "4x8", video: "https://www.youtube.com/embed/XYCCcD0MxN8", descanso: 90 }
+      { nome: "Leg Press 45", series: "4x8", video: [ "https://youtube.com/embed/HTz5WMQwaNw?si=tpVQNuQJpyba6iVz", "https://www.youtube.com/embed/nY8UsiAqwds" ], descanso: 90 },
+      { nome: "Stiff", series: "4x8", video: [ "https://youtube.com/embed/rI20dW9dP18?si=54PVwgQsjnZ3rdz1", "https://www.youtube.com/embed/u1E3_u2gJYE" ], descanso: 90 },
+      { nome: "Flexão de Joelho em Pé", series: "4x8", video: [ "https://youtube.com/embed/x1nlPc8AE4U?si=gyqABD9I7vYpi7m_", "https://www.youtube.com/embed/AqALAGcDvcI" ], descanso: 90 },
+      { nome: "Coice na Polia", series: "4x8",  video: [ "https://youtube.com/embed/1AHpsvuYRhE?si=49QPImGJsZNgkLla", "https://www.youtube.com/embed/XYCCcD0MxN8" ], descanso: 90 }
     ]
   },
 
@@ -166,12 +166,12 @@ export const treinos = [
     id: 10,
     nome: "Treino isolado com progressão de carga A",
     exercicios: [
-      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
-      { nome: "Agachamento", series: "3x10-8-6", video: "https://www.youtube.com/embed/zgk71dUUt0Y", descanso: 90 },
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: [ "https://youtube.com/embed/fsTefwdvHrU?si=nnPnvSs7qd9FsqbV", "https://www.youtube.com/embed/_vDDFsPbubs" ], descanso: 90 },
+      { nome: "Agachamento", series: "3x10-8-6", video: [ "https://youtube.com/embed/Nb-yDcN0CUE?si=N5waalrWZ8UXEJL6", "https://www.youtube.com/embed/zgk71dUUt0Y" ], descanso: 90 },
       { nome: "Afundo (step frente e atrás)", series: "3x10-8-6", video: "https://www.youtube.com/embed/Umzor-_g-tQ", descanso: 90 },
       { nome: "Cadeira Extensora", series: "3x10-8-6", video: "https://www.youtube.com/embed/el3oHblB5DM", descanso: 90 },
-      { nome: "Leg Press", series: "3x10-8-6", video: "https://www.youtube.com/embed/nY8UsiAqwds", descanso: 90 },
-      { nome: "Agachamento Taça", series: "3x10-8-6", video: "https://www.youtube.com/embed/isSu2co__oY", descanso: 90 }
+      { nome: "Leg Press", series: "3x10-8-6", video: [ "https://youtube.com/embed/HTz5WMQwaNw?si=tpVQNuQJpyba6iVz", "https://www.youtube.com/embed/nY8UsiAqwds" ], descanso: 90 },
+      { nome: "Agachamento Taça", series: "3x10-8-6", video: [ "https://youtube.com/embed/9sHwZFJ26tw?si=guGIcPtnqhJEKuQX", "https://www.youtube.com/embed/isSu2co__oY" ], descanso: 90 }
     ]
   },
 
@@ -179,12 +179,12 @@ export const treinos = [
     id: 11,
     nome: "Treino isolado com progressão de carga C",
     exercicios: [
-      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/B-2lEIr2sfs", descanso: 90 },
-      { nome: "Stiff", series: "3x10-8-6", video: "https://www.youtube.com/embed/u1E3_u2gJYE", descanso: 90 },
-      { nome: "Cadeira Flexora", series: "3x10-8-6", video: "https://www.youtube.com/embed/Zss6E3VU6X0", descanso: 90 },
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: [ "https://youtube.com/embed/fsTefwdvHrU?si=nnPnvSs7qd9FsqbV", "https://www.youtube.com/embed/_vDDFsPbubs" ], descanso: 90 },
+      { nome: "Stiff", series: "3x10-8-6", video: [ "https://youtube.com/embed/rI20dW9dP18?si=54PVwgQsjnZ3rdz1", "https://www.youtube.com/embed/u1E3_u2gJYE" ], descanso: 90 },
+      { nome: "Cadeira Flexora", series: "3x10-8-6", video: [ "https://youtube.com/embed/GN_-ZffR7WU?si=Im_02--Ohe6cvWSU", "https://www.youtube.com/embed/Zss6E3VU6X0" ], descanso: 90 },
       { nome: "Mesa Flexora", series: "3x10-8-6", video: "https://www.youtube.com/embed/2-ULaRrQa7c", descanso: 90 },
-      { nome: "Bom Dia", series: "3x10-8-6", video: "https://www.youtube.com/embed/48gi7GPzTLQ", descanso: 90 },
-      { nome: "Flexão de Joelho em Pé", series: "3x10-8-6", video: "https://www.youtube.com/embed/isSu2co__oY", descanso: 90 }
+      { nome: "Bom Dia", series: "3x10-8-6", video: [ "https://youtube.com/embed/voUX-zO1zlA?si=YBX4UDCSagqlP694", "https://www.youtube.com/embed/48gi7GPzTLQ" ], descanso: 90 },
+      { nome: "Flexão de Joelho em Pé", series: "3x10-8-6", video: [ "https://youtube.com/embed/x1nlPc8AE4U?si=gyqABD9I7vYpi7m_", "https://www.youtube.com/embed/AqALAGcDvcI" ], descanso: 90 }
     ]
   },
 
@@ -192,11 +192,11 @@ export const treinos = [
     id: 12,
     nome: "Treino Isolado com progressão de carga E",
     exercicios: [
-      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: "https://www.youtube.com/embed/_vDDFsPbubs", descanso: 90 },
-      { nome: "Agachamento Búlgaro", series: "3x10-8-6", video: "https://www.youtube.com/embed/IGf9fR4Y7Iw", descanso: 90 },
+      { nome: "Cadeira Abdutora", series: "3x10-8-6", video: [ "https://youtube.com/embed/fsTefwdvHrU?si=nnPnvSs7qd9FsqbV", "https://www.youtube.com/embed/_vDDFsPbubs" ], descanso: 90 },
+      { nome: "Agachamento Búlgaro", series: "3x10-8-6", video: [ "https://youtube.com/embed/92a1UHIafsA?si=9HnlFXRXMYWz_BHz", "https://www.youtube.com/embed/IGf9fR4Y7Iw" ], descanso: 90 },
       { nome: "Step Up", series: "3x10-8-6", video: "https://www.youtube.com/embed/qYFlvmFu2wE", descanso: 90 },
-      { nome: "Levantamento Terra", series: "3x10-8-6", video: "https://www.youtube.com/embed/50AkPBZwACQ", descanso: 90 },
-      { nome: "Agachamento Sumô", series: "3x10-8-6", video: "https://www.youtube.com/embed/uSbxGCa71PU", descanso: 90 },
+      { nome: "Levantamento Terra", series: "3x10-8-6", video: [ "https://youtube.com/embed/zXYOcZkR9to?si=11bo5pY9p3JfiOre", "https://www.youtube.com/embed/50AkPBZwACQ" ], descanso: 90 },
+      { nome: "Agachamento Sumô", series: "3x10-8-6", video: [ "https://youtube.com/embed/Jddi_hlOzdg?si=xXeDy2JfeTg0Ky42", "https://www.youtube.com/embed/uSbxGCa71PU" ], descanso: 90 },
       { nome: "Coice na Polia", series: "3x10-8-6", video: [ "https://youtube.com/embed/1AHpsvuYRhE?si=49QPImGJsZNgkLla", "https://www.youtube.com/embed/XYCCcD0MxN8" ], descanso: 90 }
     ]
   }
